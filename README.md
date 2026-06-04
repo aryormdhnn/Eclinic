@@ -2,10 +2,6 @@
 
 > Platform telemedicine modern untuk konsultasi dokter, toko obat online, dan artikel kesehatan.
 
-![eClinic Banner](./src/assets/dokter-cover.png)
-
----
-
 ## 📋 Deskripsi Proyek
 
 **eClinic** adalah aplikasi web telemedicine yang memungkinkan pengguna untuk:

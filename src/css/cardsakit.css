@@ -59,7 +59,7 @@
     }
 }
 
-
+@media screen and (max-width: 540px) {
     .JenisSakit {
       margin: 16px;
     }

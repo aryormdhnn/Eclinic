@@ -1,0 +1,19 @@
+{
+  "name": "eClinic Telemedicine App",
+  "short_name": "eClinic",
+  "description": "Aplikasi telemedicine untuk konsultasi dokter, toko obat, artikel kesehatan, dan pemesanan online.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f6faf8",
+  "theme_color": "#0a8f61",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

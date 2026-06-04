@@ -4,6 +4,10 @@ import {
   HiChevronDown,
   HiMenu,
   HiX,
+  HiHome,
+  HiSearch,
+  HiDocumentText,
+  HiShoppingBag,
 } from "react-icons/hi";
 import React, { useState, useContext, useRef, useEffect } from "react";
 import "../css/header.css";
@@ -45,40 +49,33 @@ export const Header = () => {
   };
 
   const totalCartItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const navItems = [
+    { to: "/", label: "Dashboard", icon: HiHome, end: true },
+    { to: "/cari-dokter", label: "Dokter", icon: HiSearch },
+    { to: "/artikel", label: "Artikel", icon: HiDocumentText },
+    { to: "/toko", label: "Toko", icon: HiShoppingBag },
+  ];
 
   return (
     <div>
       <nav className="navbar">
         <div className="menubar">
-          <Link to="/">
+          <Link to="/" className="brand-link">
             <img src={Logo} alt="eClinic Logo" className="logo" />
+            <span>eClinic</span>
           </Link>
           <div className="menu men-nav">
-            <NavLink
-              to="/"
-              end
-              className={({ isActive }) => "nav-link" + (isActive ? " active" : "")}
-            >
-              Beranda
-            </NavLink>
-            <NavLink
-              to="/cari-dokter"
-              className={({ isActive }) => "nav-link" + (isActive ? " active" : "")}
-            >
-              Cari Dokter
-            </NavLink>
-            <NavLink
-              to="/artikel"
-              className={({ isActive }) => "nav-link" + (isActive ? " active" : "")}
-            >
-              Artikel
-            </NavLink>
-            <NavLink
-              to="/toko"
-              className={({ isActive }) => "nav-link" + (isActive ? " active" : "")}
-            >
-              Toko Obat
-            </NavLink>
+            {navItems.map(({ to, label, icon: Icon, end }) => (
+              <NavLink
+                key={to}
+                to={to}
+                end={end}
+                className={({ isActive }) => "nav-link" + (isActive ? " active" : "")}
+              >
+                <Icon />
+                <span>{label}</span>
+              </NavLink>
+            ))}
           </div>
         </div>
 
@@ -147,18 +144,18 @@ export const Header = () => {
 
             {isSideMenuOpen && (
               <div className="menu men-side">
-                <NavLink to="/" end className="nav-link" onClick={closeSideMenu}>
-                  Beranda
-                </NavLink>
-                <NavLink to="/cari-dokter" className="nav-link" onClick={closeSideMenu}>
-                  Cari Dokter
-                </NavLink>
-                <NavLink to="/artikel" className="nav-link" onClick={closeSideMenu}>
-                  Artikel
-                </NavLink>
-                <NavLink to="/toko" className="nav-link" onClick={closeSideMenu}>
-                  Toko Obat
-                </NavLink>
+                {navItems.map(({ to, label, icon: Icon, end }) => (
+                  <NavLink
+                    key={to}
+                    to={to}
+                    end={end}
+                    className="nav-link"
+                    onClick={closeSideMenu}
+                  >
+                    <Icon />
+                    <span>{label}</span>
+                  </NavLink>
+                ))}
                 {loggedInUser && (
                   <button onClick={handleLogout} className="keluar">
                     Keluar

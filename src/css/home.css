@@ -1,61 +1,214 @@
-.banner{
-    margin: 40px 120px;
-    background-color: rgb(27, 190, 117);
-    border-radius: 16px;
+.app-home {
+    background: #f6faf8;
+    min-height: calc(100vh - 80px);
+    padding-bottom: 40px;
 }
 
-.banner-cover{
-    margin: 40px 24px;
+.app-dashboard {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+    gap: 32px;
+    margin: 0 120px;
+    padding: 40px 0 24px;
+    align-items: stretch;
 }
 
-.banner-title{
-    font-size: 48px;
+.dashboard-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+    min-height: 420px;
+}
+
+.dashboard-kicker {
+    width: fit-content;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: #dff7ec;
+    color: #08764f;
+    font-size: 14px;
     font-weight: 700;
+}
+
+.dashboard-copy h1 {
+    max-width: 680px;
+    color: #12201b;
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 0;
+}
+
+.dashboard-copy p {
+    max-width: 560px;
+    color: #50645d;
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+.dashboard-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.primary-action,
+.secondary-action,
+.section-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 18px;
+    border-radius: 8px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.primary-action {
+    background: #0a8f61;
     color: #fff;
 }
 
-.banner-text{
+.primary-action:hover {
+    color: #fff;
+    background: #08764f;
+}
+
+.secondary-action,
+.section-link {
+    border: 1px solid #b6d8c9;
+    color: #0a6849;
+    background: #fff;
+}
+
+.secondary-action:hover,
+.section-link:hover {
+    color: #0a6849;
+    border-color: #0a8f61;
+}
+
+.dashboard-panel {
+    position: relative;
+    overflow: hidden;
+    min-height: 420px;
+    border-radius: 8px;
+    background: #163c32;
+    color: #fff;
+    padding: 24px;
+}
+
+.appointment-card {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: 6px;
+    max-width: 260px;
+    padding: 16px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.94);
+    color: #1c2a25;
+    box-shadow: 0 14px 40px rgba(14, 32, 25, 0.18);
+}
+
+.appointment-card span,
+.appointment-card small {
+    color: #5b6f66;
+    font-size: 13px;
+}
+
+.appointment-card strong {
     font-size: 20px;
-    font-weight: 400;
-    color: #fff;
 }
 
-.banner .btn-success{
-    margin-top: 16px;
-    background-color: #fff;
-    color: rgb(27, 190, 117);
-    border: 1px solid rgb(27, 190, 117);
+.dashboard-stats {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 18px;
 }
 
-.ban-btn{
-    background-color: #fff;
-    color: rgb(27, 190, 117);
-    border: 1px solid rgb(27, 190, 117);
+.dashboard-stats div {
+    padding: 14px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.16);
 }
 
-/* Hero image — responsive, no fixed width/height */
-.banner-img {
-    max-width: 100%;
-    height: auto;
+.dashboard-stats strong,
+.dashboard-stats span {
     display: block;
-    margin: 0 auto;
 }
 
-.cariDokter{
+.dashboard-stats strong {
+    font-size: 24px;
+}
+
+.dashboard-stats span {
+    color: #d5ebe1;
+    font-size: 13px;
+}
+
+.dashboard-img {
+    position: absolute;
+    right: -44px;
+    bottom: -18px;
+    width: min(460px, 92%);
+    height: auto;
+}
+
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin: 0 120px 32px;
+}
+
+.quick-action {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 72px;
+    padding: 16px;
+    border: 1px solid #dcebe5;
+    border-radius: 8px;
+    background: #fff;
+    color: #17352c;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 10px 28px rgba(11, 72, 51, 0.06);
+}
+
+.quick-action:hover {
+    color: #0a8f61;
+    border-color: #a8d8c4;
+}
+
+.quick-action svg {
+    width: 24px;
+    height: 24px;
+    color: #0a8f61;
+    flex: 0 0 auto;
+}
+
+.cariDokter {
     margin: 80px 120px;
 }
 
-.cariDokter-content{
+.cariDokter-content {
     margin-bottom: 24px;
 }
 
-.cariDokter-title{
+.cariDokter-title {
     font-size: 32px;
     font-weight: 700;
     color: #000;
 }
 
-.dokterRekomendasi{
+.dokterRekomendasi {
     margin: 0 120px;
 }
 
@@ -63,26 +216,50 @@
     margin: 40px 120px 0;
 }
 
-.JenisSakit .row .bt2{
-    display: none;
+.app-section {
+    padding: 28px;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid #e4eee9;
 }
 
-/* ── Tablet (768px) ─────────────────────── */
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.section-heading span {
+    color: #0a8f61;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.section-heading h2 {
+    margin: 4px 0 0;
+}
+
 @media screen and (max-width: 768px) {
-    .banner {
-        margin: 24px 32px;
+    .app-dashboard {
+        grid-template-columns: 1fr;
+        margin: 0 32px;
+        padding-top: 28px;
     }
 
-    .banner-title {
-        font-size: 32px;
+    .dashboard-copy {
+        min-height: unset;
+        padding-top: 16px;
     }
 
-    .banner-text {
-        font-size: 16px;
+    .dashboard-copy h1 {
+        font-size: 36px;
     }
 
-    .banner-img {
-        max-width: 80%;
+    .quick-actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin: 0 32px 28px;
     }
 
     .JenisSakit {
@@ -94,64 +271,66 @@
     }
 }
 
-/* ── Mobile (540px) ─────────────────────── */
 @media screen and (max-width: 540px) {
-
-    .banner{
-        margin: 20px 12px;
-        border-radius: 12px;
-        flex-direction: column;
+    .app-home {
+        padding-bottom: 24px;
     }
 
-    .banner .row {
-        flex-direction: column-reverse;
+    .app-dashboard {
+        margin: 0 12px;
+        gap: 18px;
     }
 
-    .banner-cover{
-        margin: 16px 12px 24px;
+    .dashboard-copy {
+        gap: 14px;
     }
 
-    .banner-title{
-        font-size: 24px;
-        font-weight: 700;
+    .dashboard-copy h1 {
+        font-size: 30px;
     }
 
-    .banner-text{
+    .dashboard-copy p {
+        font-size: 15px;
+    }
+
+    .dashboard-actions a {
+        width: 100%;
+    }
+
+    .dashboard-panel {
+        min-height: 360px;
+        padding: 16px;
+    }
+
+    .dashboard-img {
+        right: -70px;
+        width: 360px;
+    }
+
+    .quick-actions {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin: 0 12px 20px;
+    }
+
+    .quick-action {
+        min-height: 64px;
+        padding: 12px;
         font-size: 14px;
-        font-weight: 400;
-    }
-
-    .banner .btn{
-        margin-top: 16px;
-        font-size: 14px;
-    }
-
-    /* Show image on mobile, just smaller */
-    .banner-img {
-        max-width: 60%;
-        margin: 16px auto 0;
     }
 
     .JenisSakit {
         margin: 16px 12px 0;
+        padding: 18px 14px;
     }
 
-    .JenisSakit .rekomendasi-title{
+    .JenisSakit .rekomendasi-title {
         font-size: 20px;
     }
 
-    .JenisSakit .row .bt1{
-        display: none;
-    }
-
-    .JenisSakit .col-sm-2:last-child{
-        display: block;
-        margin-top: 1.5rem;
-    }
-
-    .JenisSakit .btn{
-        width: 100%;
-        font-size: 14px;
+    .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
     }
 
     .dokterRekomendasi {

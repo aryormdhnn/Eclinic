@@ -1,103 +1,102 @@
 import React, { useState, useContext } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import '../globalstyle.css';
 import '../css/login.css';
 
 const RegisterPage = () => {
   const { register } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
-
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setError('');
 
-    // Periksa apakah username, password, dan email kosong
     if (username.trim() === '' || password.trim() === '' || email.trim() === '') {
-      window.alert('Username, password, dan email harus diisi');
+      setError('Username, password, dan email harus diisi.');
       return;
     }
 
+    setIsLoading(true);
     try {
       const response = await fetch(
         'https://6454643dc18adbbdfeb53cd7.mockapi.io/api/fe-11/user',
         {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username, password, email }),
         }
       );
 
       if (response.ok) {
-        // Registrasi berhasil
-        // Lakukan penanganan registrasi berhasil
-        register(username); // Set isAuthenticated ke true
-        window.location.href = '/';
-        console.log('Registrasi berhasil');
+        register(username);
+        navigate('/');
       } else {
-        window.alert('Registrasi tidak berhasil');
-        // Registrasi gagal
-        // Lakukan penanganan registrasi gagal
-        setError('Registrasi tidak berhasil');
+        setError('Registrasi tidak berhasil. Coba lagi.');
       }
-    } catch (error) {
-      console.error('Terjadi kesalahan', error);
+    } catch (err) {
+      setError('Terjadi kesalahan. Coba lagi nanti.');
+      console.error(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <div>
-      {error && <p>{error}</p>}
       <form onSubmit={handleSubmit} className="register-form">
         <h2>Register</h2>
+
+        {error && (
+          <div className="form-error" role="alert">
+            {error}
+          </div>
+        )}
+
         <div>
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="reg-username">Username:</label>
           <input
             type="text"
-            id="username"
+            id="reg-username"
             value={username}
-            onChange={handleUsernameChange}
+            onChange={(e) => setUsername(e.target.value)}
+            autoComplete="username"
           />
         </div>
         <div>
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="reg-password">Password:</label>
           <input
             type="password"
-            id="password"
+            id="reg-password"
             value={password}
-            onChange={handlePasswordChange}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="new-password"
           />
         </div>
         <div>
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="reg-email">Email:</label>
           <input
             type="email"
-            id="email"
+            id="reg-email"
             value={email}
-            onChange={handleEmailChange}
+            onChange={(e) => setEmail(e.target.value)}
+            autoComplete="email"
           />
         </div>
-        <button type="submit">Register</button>
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? 'Mendaftar...' : 'Register'}
+        </button>
       </form>
 
       <p className="text-link">
-            Sudah Memiliki akun? <a href="/login">Masuk</a>
-          </p>
+        Sudah memiliki akun? <Link to="/login">Masuk</Link>
+      </p>
     </div>
   );
 };

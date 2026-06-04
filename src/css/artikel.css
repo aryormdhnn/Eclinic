@@ -6,7 +6,6 @@
     margin-bottom: 24px;
 }
 
-
 .artikel-title{
     font-size: 32px;
     font-weight: bold;
@@ -14,10 +13,11 @@
     color: #121212;
 }
 
-
 .card-body img{
     border-radius: 12px;
     margin-bottom: 16px;
+    width: 100%;
+    height: auto;
 }
 
 .article-tittle{
@@ -38,6 +38,21 @@
 
 .artikel .bt2{
     display:none ;
+}
+
+/* ── Tablet (768px) ────────────────── */
+@media screen and (max-width: 768px) {
+    .artikel {
+        margin: 40px 32px;
+    }
+
+    .artikel-title {
+        font-size: 26px;
+    }
+
+    .artikel .artikel-list .col-sm-4 {
+        width: 50%;
+    }
 }
 
 @media screen and (max-width:540px) {

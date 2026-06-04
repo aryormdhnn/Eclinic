@@ -10,8 +10,8 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
     return (
-        <> 
-        < div className = "banner" > 
+        <>
+        <div className="banner">
         <div className="row align-items-center">
             <div className="col-sm-6">
                 <div className="banner-cover">
@@ -25,7 +25,7 @@ const Home = () => {
                 </div>
             </div>
             <div className="col-sm-6 text-center">
-                <img src={ImageCover} alt="Gambar" width={500} height={437}/>
+                <img src={ImageCover} alt="Dokter Konsultasi" className="banner-img" />
             </div>
         </div>
     </div>
@@ -36,15 +36,15 @@ const Home = () => {
                 <h3 className="rekomendasi-title">Cari Obat</h3>
             </div>
             <div className="bt1 col-sm-2 text-end">
-                <a href="/tokoObat" className="btn btn-success">
-                    Lihat Semuanya 
-                </a>
+                <Link to="/toko" className="btn btn-success">
+                    Lihat Semuanya
+                </Link>
             </div>
             <CardJenisSakit/>
             <div className="bt2 col-sm-2 text-end">
-                <a href="/tokoObat" className="btn btn-success">
-                    Lihat Semuanya 
-                </a>
+                <Link to="/toko" className="btn btn-success">
+                    Lihat Semuanya
+                </Link>
             </div>
         </div>
     </div>

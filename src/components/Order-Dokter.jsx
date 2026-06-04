@@ -1,15 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../context/UserContext";
 import { OrderContext } from "../context/OrderContext";
 import "../css/dokter.css";
 import "../css/detailDokter.css";
 import "../css/OrderPage.css";
-import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
-import { SyncLoader  } from 'react-spinners';
-import { css } from '@emotion/react';
+import { SyncLoader } from 'react-spinners';
 
 
 
@@ -41,18 +39,10 @@ const OrderDokter = () => {
     fetchUserDetail();
   }, [id]);
 
-  const override = css`
-  display: block;
-  margin: 0 auto;
-  border-color: red;
-
-`;
-
-
   if (!userDetail) {
     return (
       <div className="loader">
-        <SyncLoader  color="#36d7b7" loading={!userDetail} css={override} size={24} />
+        <SyncLoader color="#36d7b7" size={24} />
       </div>
     );
   }

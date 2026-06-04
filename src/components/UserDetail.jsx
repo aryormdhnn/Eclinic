@@ -1,87 +1,56 @@
 import React, { useContext, useEffect, useState } from "react";
-import { redirect, useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../context/UserContext";
-
 import "../css/dokter.css";
 import "../css/detailDokter.css";
 import { Icon } from "@iconify/react";
-import { Link } from "react-router-dom";
+import LoadingSpinner from "./ui/LoadingSpinner";
 
 const UserDetail = () => {
   const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
   const { id } = useParams();
-  const {
-    handleScheduleChange,
-    updateInputValue,
-    setRating,
-    handleRatingChange,
-  } = useContext(UserContext);
+  const { handleScheduleChange, updateInputValue } = useContext(UserContext);
+
   const [userDetail, setUserDetail] = useState(null);
   const [selectedFeature, setSelectedFeature] = useState("");
-  const [selectedConsultFilter, setSelectedConsultFilter] =
-    useState("Konsultasi Chat");
-  const [isClicked, setIsClicked] = useState(false);
-  const [isConfirm, setIsConfirm] = useState(true);
-
-  const handleFeatureChange = (event) => {
-    setSelectedFeature(event.target.value);
-  };
+  const [selectedConsultFilter, setSelectedConsultFilter] = useState("Konsultasi Chat");
+  const [isScheduleConfirmed, setIsScheduleConfirmed] = useState(false);
 
   useEffect(() => {
-    const fetchUserDetail = async () => {
-      try {
-        const response = await axios.get(
-          `https://64527770a2860c9ed40d2a69.mockapi.io/doctor/${id}`
-        );
-        setUserDetail(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchUserDetail();
+    axios
+      .get(`https://64527770a2860c9ed40d2a69.mockapi.io/doctor/${id}`)
+      .then((res) => setUserDetail(res.data))
+      .catch((err) => console.error(err));
   }, [id]);
 
-  if (!userDetail) {
-    return <p className="load">Loading...</p>;
-  }
+  if (!userDetail) return <LoadingSpinner />;
 
-  const handleConsult = (event) => {
-    setSelectedConsultFilter(event.target.value);
-    console.log(selectedConsultFilter);
-  };
+  const scheduleOptions = [
+    { day: userDetail.day1, date: userDetail.date1 },
+    { day: userDetail.day2, date: userDetail.date2 },
+    { day: userDetail.day3, date: userDetail.date3 },
+  ];
 
-  // const generateRandomNumber = () => {
-  //   const min = 3;
-  //   const max = 5;
-  //   const randomNumber = Math.random() * (max - min) + min;
-  //   return randomNumber.toFixed(2); // Menggunakan 2 digit desimal
-  // };
-
-  // const randomDecimal = generateRandomNumber();
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Fitur yang dipilih:", selectedFeature);
-    console.log("Konsultasi yang dipilih:", selectedConsultFilter);
-    setIsClicked(true);
-    setIsConfirm(false);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!selectedFeature) return;
     handleScheduleChange(selectedFeature);
     updateInputValue(selectedConsultFilter);
-
-    // Lakukan pengolahan data yang diperlukan dengan nilai yang dipilih
+    setIsScheduleConfirmed(true);
   };
 
   return (
     <div>
       <div className="profil-dokter">
         <div className="profil-detail">
+
+          {/* Doctor Profile Card */}
           <div className="card-profil-dokter">
             <div className="card-profil-img">
               <img
                 src={userDetail.avatar}
-                alt="Gambar"
+                alt={`Foto dr. ${userDetail.name}`}
                 className="dokter-image"
               />
             </div>
@@ -90,221 +59,79 @@ const UserDetail = () => {
               <p>{userDetail.job}</p>
               <div className="icon-star">
                 <p>{userDetail.rating}</p>
-                <Icon className="ic-star" icon="ic:outline-star" />
-                <Icon className="ic-star" icon="ic:outline-star" />
-                <Icon className="ic-star" icon="ic:outline-star" />
-                <Icon className="ic-star" icon="ic:outline-star" />
-                <Icon className="ic-star" icon="ic:outline-star" />
+                {[...Array(5)].map((_, i) => (
+                  <Icon key={i} className="ic-star" icon="ic:outline-star" />
+                ))}
               </div>
             </div>
           </div>
+
+          {/* Booking Form */}
           <div className="card-order">
             <h3>Tipe Konsultasi</h3>
             <div className="type-consult">
               <Icon icon="carbon:chat" className="ic" />
-              <select value={selectedConsultFilter} onChange={handleConsult}>
+              <select
+                value={selectedConsultFilter}
+                onChange={(e) => setSelectedConsultFilter(e.target.value)}
+                aria-label="Pilih tipe konsultasi"
+              >
                 <option value="Konsultasi Video">Konsultasi Video</option>
                 <option value="Konsultasi Chat">Konsultasi Chat</option>
               </select>
             </div>
-            <h3>Jadwal Konsultasi</h3>
 
+            <h3>Jadwal Konsultasi</h3>
             <form onSubmit={handleSubmit}>
-              <label className="jadwal-btn">
-                <input
-                  type="radio"
-                  value={
-                    userDetail.day1 + ", " + userDetail.date1.substring(0, 10)
-                  }
-                  checked={
-                    selectedFeature ===
-                    userDetail.day1 + ", " + userDetail.date1.substring(0, 10)
-                  }
-                  onChange={handleFeatureChange}
-                />
-                {userDetail.day1}, {userDetail.date1.substring(0, 10)}
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  value={
-                    userDetail.day2 + ", " + userDetail.date2.substring(0, 10)
-                  }
-                  checked={
-                    selectedFeature ===
-                    userDetail.day2 + ", " + userDetail.date2.substring(0, 10)
-                  }
-                  onChange={handleFeatureChange}
-                />
-                {userDetail.day2}, {userDetail.date2.substring(0, 10)}
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  value={
-                    userDetail.day3 + ", " + userDetail.date3.substring(0, 10)
-                  }
-                  checked={
-                    selectedFeature ===
-                    userDetail.day3 + ", " + userDetail.date3.substring(0, 10)
-                  }
-                  onChange={handleFeatureChange}
-                />
-                {userDetail.day3}, {userDetail.date3.substring(0, 10)}
-              </label>
+              {scheduleOptions.map(({ day, date }) => {
+                const value = `${day}, ${date.substring(0, 10)}`;
+                return (
+                  <label key={day} className="jadwal-btn">
+                    <input
+                      type="radio"
+                      value={value}
+                      checked={selectedFeature === value}
+                      onChange={(e) => setSelectedFeature(e.target.value)}
+                    />
+                    {day}, {date.substring(0, 10)}
+                  </label>
+                );
+              })}
+
               <button
                 type="submit"
-                className={isClicked ? "clicked" : "button-form"}
-                disabled={isClicked}
+                className={isScheduleConfirmed ? "clicked" : "button-form"}
+                disabled={isScheduleConfirmed || !selectedFeature}
               >
-                Pilih Jadwal
+                {isScheduleConfirmed ? "Jadwal Dipilih ✓" : "Pilih Jadwal"}
               </button>
+
               <div className="next-page">
-                {isConfirm ? (
+                {!isScheduleConfirmed ? (
+                  <span className="disabled">Lanjutkan Pemesanan</span>
+                ) : loggedInUser ? (
                   <Link
-                  className="disabled"
-                  to={`/login`}
-                  
-                >
-                  Lanjutkan Pemesanan
-                </Link>
-                ) : (
-                    <>
-                    {loggedInUser ? (
-                    <Link
                     className="button-form"
                     to={`/order-dokter/${userDetail.id}`}
-                    
                   >
                     Lanjutkan Pemesanan
-                  </Link>) : (
-                    <Link
-                    className="button-form"
-                    to={`/login`}
-                    
-                  >
-                    Lanjutkan Pemesanan
-                  </Link>)  
-                    }
-
-                    </>
-                )
-              
-                }
+                  </Link>
+                ) : (
+                  <Link className="button-form" to="/login">
+                    Masuk untuk Melanjutkan
+                  </Link>
+                )}
               </div>
             </form>
           </div>
+
+          {/* Doctor Info */}
           <div className="card-profil-detail">
             <h3>Tentang Dokter</h3>
             <p>{userDetail.about}</p>
-            <h3>STR</h3>
-            <p>16638767167144</p>
-            <h3>Pengalaman Praktek</h3>
-            <h6>RSUD</h6>
-            <span className="tahun">202192-102928</span>
-            <h6>RSUD</h6>
-            <p>202192-102928</p>
             <h3>Pendidikan Terakhir</h3>
             <h6>{userDetail.educate}</h6>
             <p>{userDetail.date}</p>
-          </div>
-        </div>
-
-        <div className="order-dokter">
-          <div className="card-order">
-            <h3>Tipe Konsultasi</h3>
-            <div className="type-consult">
-              <Icon icon="carbon:chat" className="ic" />
-              <select value={selectedConsultFilter} onChange={handleConsult}>
-                <option value="Konsultasi Video">Konsultasi Video</option>
-                <option value="Konsultasi Chat">Konsultasi Chat</option>
-              </select>
-            </div>
-            <h3>Jadwal Konsultasi</h3>
-
-            <form onSubmit={handleSubmit}>
-              <label className="jadwal-btn">
-                <input
-                  type="radio"
-                  value={
-                    userDetail.day1 + ", " + userDetail.date1.substring(0, 10)
-                  }
-                  checked={
-                    selectedFeature ===
-                    userDetail.day1 + ", " + userDetail.date1.substring(0, 10)
-                  }
-                  onChange={handleFeatureChange}
-                />
-                {userDetail.day1}, {userDetail.date1.substring(0, 10)}
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  value={
-                    userDetail.day2 + ", " + userDetail.date2.substring(0, 10)
-                  }
-                  checked={
-                    selectedFeature ===
-                    userDetail.day2 + ", " + userDetail.date2.substring(0, 10)
-                  }
-                  onChange={handleFeatureChange}
-                />
-                {userDetail.day2}, {userDetail.date2.substring(0, 10)}
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  value={
-                    userDetail.day3 + ", " + userDetail.date3.substring(0, 10)
-                  }
-                  checked={
-                    selectedFeature ===
-                    userDetail.day3 + ", " + userDetail.date3.substring(0, 10)
-                  }
-                  onChange={handleFeatureChange}
-                />
-                {userDetail.day3}, {userDetail.date3.substring(0, 10)}
-              </label>
-              <button
-                type="submit"
-                className={isClicked ? "clicked" : "button-form"}
-                disabled={isClicked}
-              >
-                Pilih Jadwal
-              </button>
-              <div className="next-page">
-                {isConfirm ? (
-                   <Link
-                  className="disabled"
-                  to={`/login`}
-                >
-                  Lanjutkan Pemesanan
-                </Link>
-                ) : (
-                    <>
-                    {loggedInUser ? (
-                    <Link
-                    className="button-form"
-                    to={`/order-dokter/${userDetail.id}`}
-                    
-                  >
-                    Lanjutkan Pemesanan
-                  </Link>) : (
-                    <Link
-                    className="button-form"
-                    to={`/login`}
-                    
-                  >
-                    Lanjutkan Pemesanan
-                  </Link>)  
-                    }
-
-                    </>
-                )
-              
-                }
-              </div>
-            </form>
           </div>
         </div>
       </div>

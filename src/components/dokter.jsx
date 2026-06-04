@@ -3,33 +3,38 @@ import "../css/dokter.css";
 import "../globalstyle.css";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Button } from "bootstrap";
 import { HiChevronDown } from "react-icons/hi";
+import SpecialtyFilter from "./features/doctor/SpecialtyFilter";
+import LoadingSpinner from "./ui/LoadingSpinner";
 
-// import { userContext } from '../context/userContext'
+const USERS_PER_PAGE = 8;
 
-const UserList = () => {
+const DoctorList = () => {
   const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [selectedJobs, setSelectedJobs] = useState([]);
-  const usersPerPage = 8; // Jumlah data per halaman
   const [selectedPriceFilter, setSelectedPriceFilter] = useState("All");
-  // const { doctor } = useContext( userContext );
-  const [move, setMove] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     fetch("https://64527770a2860c9ed40d2a69.mockapi.io/doctor")
-      .then((response) => response.json())
-      .then((data) => setUsers(data))
-      .catch((error) => console.log(error));
+      .then((res) => res.json())
+      .then((data) => {
+        setUsers(data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setIsLoading(false);
+      });
   }, []);
 
-  // Menghitung indeks awal dan akhir data yang ditampilkan
-  const indexOfLastUser = currentPage * usersPerPage;
-  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const indexOfLastUser = currentPage * USERS_PER_PAGE;
+  const indexOfFirstUser = indexOfLastUser - USERS_PER_PAGE;
 
-  // Filter data pengguna berdasarkan kata kunci pencarian
   const filteredUsers = users.filter((user) => {
     const isNameMatched = user.name
       .toLowerCase()
@@ -47,43 +52,31 @@ const UserList = () => {
   });
 
   const displayedUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
+  const totalPages = Math.ceil(filteredUsers.length / USERS_PER_PAGE);
 
-  // Fungsi untuk mengubah halaman
-  const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
+  const handleSearch = (e) => {
+    setSearchKeyword(e.target.value);
+    setCurrentPage(1);
   };
 
-  // Fungsi untuk memperbarui kata kunci pencarian
-  const handleSearch = (event) => {
-    setSearchKeyword(event.target.value);
-    setCurrentPage(1); // Reset halaman ke 1 saat melakukan pencarian
+  const handleJobSelection = (e) => {
+    const job = e.target.value;
+    setSelectedJobs((prev) =>
+      e.target.checked ? [...prev, job] : prev.filter((j) => j !== job)
+    );
+    setCurrentPage(1);
   };
 
-  // Fungsi untuk memperbarui spesialis yang dipilih
-  const handleJobSelection = (event) => {
-    const job = event.target.value;
-    if (event.target.checked) {
-      setSelectedJobs([...selectedJobs, job]);
-    } else {
-      setSelectedJobs(
-        selectedJobs.filter((selectedJob) => selectedJob !== job)
-      );
-    }
-    setCurrentPage(1); // Reset halaman ke 1 saat melakukan pemilihan pekerjaan
+  const handlePriceFilter = (e) => {
+    setSelectedPriceFilter(e.target.value);
+    setCurrentPage(1);
   };
 
-  // Fungsi untuk memperbarui filter harga
-  const handlePriceFilter = (event) => {
-    setSelectedPriceFilter(event.target.value);
-    setCurrentPage(1); // Reset halaman ke 1 saat melakukan pemilihan filter umur
-  };
-
-  if (!users) {
-    return <p className="load">Loading...</p>;
-  }
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <div className="hal-dokter">
+      {/* Search & Price Filter */}
       <div className="search-bar">
         <input
           className="search-dokter"
@@ -91,11 +84,15 @@ const UserList = () => {
           value={searchKeyword}
           onChange={handleSearch}
           placeholder="Cari Nama Dokter..."
+          aria-label="Cari nama dokter"
         />
-
         <div className="price-filter">
           <p>Filter Harga</p>
-          <select value={selectedPriceFilter} onChange={handlePriceFilter}>
+          <select
+            value={selectedPriceFilter}
+            onChange={handlePriceFilter}
+            aria-label="Filter harga"
+          >
             <option value="All">Semua Harga</option>
             <option value="Below 50">Dibawah 50.000</option>
             <option value="50-70">50.000 - 70.000</option>
@@ -105,304 +102,108 @@ const UserList = () => {
       </div>
 
       <div className="page-dokter">
+        {/* Desktop sidebar filter */}
         <div className="filtering fil1">
-          <div className="jenis-spesialis">
-            <p>Jenis Spesialis :</p>
-            <label>
-              <input
-                type="checkbox"
-                value="Umum"
-                checked={selectedJobs.includes("Umum")}
-                onChange={handleJobSelection}
-              />
-              Umum
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value="Mata"
-                checked={selectedJobs.includes("Mata")}
-                onChange={handleJobSelection}
-              />
-              Mata
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value="Jiwa"
-                checked={selectedJobs.includes("Jiwa")}
-                onChange={handleJobSelection}
-              />
-              Jiwa
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value="Otak"
-                checked={selectedJobs.includes("Otak")}
-                onChange={handleJobSelection}
-              />
-              Otak
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value="Kandungan"
-                checked={selectedJobs.includes("Kandungan")}
-                onChange={handleJobSelection}
-              />
-              Kandungan
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value="Anak"
-                checked={selectedJobs.includes("Anak")}
-                onChange={handleJobSelection}
-              />
-              Anak
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value="Penyakit Dalam"
-                checked={selectedJobs.includes("Penyakit Dalam")}
-                onChange={handleJobSelection}
-              />
-              Penyakit Dalam
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value="Spesialis THT"
-                checked={selectedJobs.includes("THT")}
-                onChange={handleJobSelection}
-              />
-              THT
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value="Ortopedi"
-                checked={selectedJobs.includes("Ortopedi")}
-                onChange={handleJobSelection}
-              />
-              Ortopedi
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value="Paru"
-                checked={selectedJobs.includes("Paru")}
-                onChange={handleJobSelection}
-              />
-              Paru
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value="Bedah Umum"
-                checked={selectedJobs.includes("Bedah Umum")}
-                onChange={handleJobSelection}
-              />
-              Bedah Umum
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value="Jantung"
-                checked={selectedJobs.includes("Jantung")}
-                onChange={handleJobSelection}
-              />
-              Jantung
-            </label>
-          </div>
+          <SpecialtyFilter
+            selectedJobs={selectedJobs}
+            onChange={handleJobSelection}
+          />
         </div>
 
-        <div className="res-filter" onClick={() => setMove(!move)}>
+        {/* Mobile accordion filter */}
+        <button
+          className="res-filter"
+          onClick={() => setIsFilterOpen((prev) => !prev)}
+          aria-expanded={isFilterOpen}
+          aria-controls="mobile-filter"
+        >
           Pilih Jenis Spesialis
           <HiChevronDown className="dropdown-button" />
-        </div>
-        {move && (
-          <>
-            <motion.div
-              className="filtering fil2"
-              animate={{ y: move ? 10 : -50, scale: move ? 1 : 0 }}
-              transition={{ duration: 0.4 }}
-            >
-              <div className="jenis-spesialis">
-                <p>Jenis Spesialis :</p>
-                <label>
-                  <input
-                    type="checkbox"
-                    value="Umum"
-                    checked={selectedJobs.includes("Umum")}
-                    onChange={handleJobSelection}
-                  />
-                  Umum
-                </label>
-                <label>
-                  <input
-                    type="checkbox"
-                    value="Mata"
-                    checked={selectedJobs.includes("Mata")}
-                    onChange={handleJobSelection}
-                  />
-                  Mata
-                </label>
-                <label>
-                  <input
-                    type="checkbox"
-                    value="Jiwa"
-                    checked={selectedJobs.includes("Jiwa")}
-                    onChange={handleJobSelection}
-                  />
-                  Jiwa
-                </label>
-                <label>
-                  <input
-                    type="checkbox"
-                    value="Otak"
-                    checked={selectedJobs.includes("Otak")}
-                    onChange={handleJobSelection}
-                  />
-                  Otak
-                </label>
-                <label>
-                  <input
-                    type="checkbox"
-                    value="Kandungan"
-                    checked={selectedJobs.includes("Kandungan")}
-                    onChange={handleJobSelection}
-                  />
-                  Kandungan
-                </label>
-                <label>
-                  <input
-                    type="checkbox"
-                    value="Anak"
-                    checked={selectedJobs.includes("Anak")}
-                    onChange={handleJobSelection}
-                  />
-                  Anak
-                </label>
-                <label>
-                  <input
-                    type="checkbox"
-                    value="Penyakit Dalam"
-                    checked={selectedJobs.includes("Penyakit Dalam")}
-                    onChange={handleJobSelection}
-                  />
-                  Penyakit Dalam
-                </label>
-                <label>
-                  <input
-                    type="checkbox"
-                    value="THT"
-                    checked={selectedJobs.includes("THT")}
-                    onChange={handleJobSelection}
-                  />
-                  THT
-                </label>
-                <label>
-                  <input
-                    type="checkbox"
-                    value="Ortopedi"
-                    checked={selectedJobs.includes("Ortopedi")}
-                    onChange={handleJobSelection}
-                  />
-                  Ortopedi
-                </label>
-                <label>
-                  <input
-                    type="checkbox"
-                    value="Paru"
-                    checked={selectedJobs.includes("Paru")}
-                    onChange={handleJobSelection}
-                  />
-                  Paru
-                </label>
-                <label>
-                  <input
-                    type="checkbox"
-                    value="Bedah"
-                    checked={selectedJobs.includes("Bedah")}
-                    onChange={handleJobSelection}
-                  />
-                  Bedah Umum
-                </label>
-                <label>
-                  <input
-                    type="checkbox"
-                    value="Jantung"
-                    checked={selectedJobs.includes("Jantung")}
-                    onChange={handleJobSelection}
-                  />
-                  Jantung
-                </label>
-              </div>
-            </motion.div>
-          </>
+        </button>
+
+        {isFilterOpen && (
+          <motion.div
+            id="mobile-filter"
+            className="filtering fil2"
+            animate={{ y: 10, scale: 1 }}
+            initial={{ y: -50, scale: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <SpecialtyFilter
+              selectedJobs={selectedJobs}
+              onChange={handleJobSelection}
+            />
+          </motion.div>
         )}
 
+        {/* Doctor Cards */}
         <div className="dokterRekomendasi">
-          <div className="row main-row">
-            {displayedUsers.map((user, index) => (
-              <div key={index} className="col-sm-3 main">
-                <div className="card border-0">
-                  <div className="card-body border-0">
-                    <div className="row border-0">
-                      <div className="col-sm-12 image">
-                        <img
-                          src={user.avatar}
-                          alt="Gambar"
-                          className="dokter-image"
-                        />
-                      </div>
-                      <div className="comp-2 col-sm-12">
-                        <h5 className="card-title">
-                          dr. {user.name.substring(0, 12)}
-                        </h5>
-                        <p className="card-text">{user.job}</p>
-                        <div className="card-price">
-                          Mulai Dari{" "}
-                          <span>Rp. {(user.price* 1000).toLocaleString()}</span>
+          {displayedUsers.length === 0 ? (
+            <div className="empty-state">
+              <p>Tidak ada dokter yang sesuai dengan filter.</p>
+            </div>
+          ) : (
+            <div className="row main-row">
+              {displayedUsers.map((user) => (
+                <div key={user.id} className="col-6 col-md-4 col-lg-3 main">
+                  <div className="card border-0">
+                    <div className="card-body border-0">
+                      <div className="row border-0">
+                        <div className="col-sm-12 image">
+                          <img
+                            src={user.avatar}
+                            alt={`Foto dr. ${user.name}`}
+                            className="dokter-image"
+                          />
                         </div>
-                        <Link
-                          className="btn btn-success"
-                          to={`/profil-dokter/${user.id}`}
-                        >
-                          Mulai Konsultasi
-                        </Link>
+                        <div className="comp-2 col-sm-12">
+                          <h5 className="card-title">
+                            dr. {user.name.substring(0, 12)}
+                          </h5>
+                          <p className="card-text">{user.job}</p>
+                          <div className="card-price">
+                            Mulai Dari{" "}
+                            <span>
+                              Rp. {(user.price * 1000).toLocaleString("id-ID")}
+                            </span>
+                          </div>
+                          <Link
+                            className="btn btn-success"
+                            to={`/profil-dokter/${user.id}`}
+                          >
+                            Mulai Konsultasi
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
-      <div>
-        {filteredUsers.length > 0 && (
-          <ul className="daftar-dokter">
-            {Array.from(
-              { length: Math.ceil(filteredUsers.length / usersPerPage) },
-              (_, i) => (
-                <li
-                  key={i + 1}
-                  onClick={() => paginate(i + 1)}
-                  className={currentPage === i + 1 ? "dokter-active" : ""}
-                >
-                  {i + 1}
-                </li>
-              )
-            )}
-          </ul>
-        )}
-      </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <ul className="daftar-dokter" aria-label="Pagination">
+          {Array.from({ length: totalPages }, (_, i) => (
+            <li
+              key={i + 1}
+              onClick={() => setCurrentPage(i + 1)}
+              className={currentPage === i + 1 ? "dokter-active" : ""}
+              role="button"
+              aria-current={currentPage === i + 1 ? "page" : undefined}
+              tabIndex={0}
+              onKeyDown={(e) => e.key === "Enter" && setCurrentPage(i + 1)}
+            >
+              {i + 1}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
 
-export default UserList;
+export default DoctorList;

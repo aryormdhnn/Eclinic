@@ -1,5 +1,5 @@
 .JenisSakit {
-    margin: 80px 120px;
+    margin: 40px 120px 0;
 }
 
 .card-jenissakit {
@@ -47,7 +47,18 @@
     margin-bottom: 8px;
 }
 
-@media Screen and (max-width: 540px) {
+/* ── Tablet (768px) ────────────────── */
+@media screen and (max-width: 768px) {
+    .JenisSakit {
+        margin: 24px 32px 0;
+    }
+
+    /* 4 columns on tablet (Bootstrap col-sm-2 = 16.6% each, force 3 col) */
+    .card-jenissakit .col-sm-2 {
+        width: 25%;
+    }
+}
+
 
     .JenisSakit {
       margin: 16px;

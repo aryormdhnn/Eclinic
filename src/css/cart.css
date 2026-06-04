@@ -220,6 +220,28 @@
 
 }
 
+.cart-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: #78828A;
+}
+
+.cart-empty p {
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+/* ── Tablet (768px) ────────────────── */
+@media screen and (max-width: 768px) {
+  .cart {
+    margin: 16px 32px;
+  }
+
+  .container-cart .row > .col-sm-6 {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+}
 
 @media screen and (max-width: 540px) {
 

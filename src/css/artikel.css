@@ -1,131 +1,193 @@
-.artikel{
-    margin: 80px 100px;
+/* ==========================================================================
+   eClinic Health Articles Section Styling (artikel.css)
+   ========================================================================== */
+
+.artikel {
+  margin: 80px 100px;
+  font-family: 'Inter', sans-serif;
 }
 
-.artikel-1{
-    margin-bottom: 24px;
+/* Header Row matching Doctor Recommendations */
+.artikel-header-row {
+  margin-bottom: 24px;
 }
 
-.artikel-title{
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 24px;
-    color: #121212;
+.artikel-header-row .artikel-section-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #0d1e2d;
+  margin: 0;
 }
 
-.card-body img{
-    border-radius: 12px;
-    margin-bottom: 16px;
-    width: 100%;
-    height: auto;
+.artikel-header-row .btn-view-all-artikel {
+  display: inline-block;
+  color: #00a376;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-.article-tittle{
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 16px;
-    color: #121212;
+.artikel-header-row .btn-view-all-artikel:hover {
+  color: #008761;
+  text-decoration: underline;
 }
 
-.card-text{
-    font-size: 16px;
-    color: #78828A;
+/* Grid Container */
+.artikel-daftar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 0;
 }
 
-.artikel .bt1 {
-    display: block;
+.article-col-wrapper {
+  padding: 0;
+}
+
+/* Article Card - Premium White Card matching Doctor Card */
+.article-recommend-card {
+  background-color: #ffffff;
+  border: 1px solid #edf2f7;
+  border-radius: 20px;
+  padding: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 12px rgba(13, 30, 45, 0.02);
+}
+
+.article-recommend-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 30px rgba(0, 163, 118, 0.08);
+  border-color: rgba(0, 163, 118, 0.15);
+}
+
+/* Image Wrapper */
+.article-card-img-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  background-color: #f1f5f9;
+}
+
+.article-card-img-wrapper .artikel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.article-recommend-card:hover .artikel-image {
+  transform: scale(1.06);
+}
+
+/* Category Badge */
+.article-card-category {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: rgba(0, 163, 118, 0.9);
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4px);
+}
+
+/* Card Content */
+.article-card-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* Article Title - max 2 lines truncate */
+.article-tittle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0d1e2d;
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+  height: 2.8em; /* Exactly 2 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Description Text - max 3 lines truncate */
+.article-card-content .card-text {
+  font-size: 14px;
+  color: #6c788f;
+  margin: 0 0 20px 0;
+  line-height: 1.5;
+  height: 4.5em; /* Exactly 3 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Read More Button */
+.btn-article-more {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background-color: #00a376 !important;
+  color: #ffffff !important;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: none;
+  margin-top: auto;
+}
+
+.btn-article-more:hover {
+  background-color: #008761 !important;
+  box-shadow: 0 4px 12px rgba(0, 163, 118, 0.2);
+}
+
+/* ── Responsive breakpoints ────────────────────────────────────────────── */
+@media screen and (max-width: 992px) {
+  .artikel {
+    margin: 60px 48px;
+  }
+  
+  .artikel-header-row .artikel-section-title {
+    font-size: 26px;
+  }
+  
+  .artikel-daftar-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .artikel {
+    margin: 40px 16px;
   }
 
-.artikel .bt2{
-    display:none ;
+  .artikel-header-row .artikel-section-title {
+    font-size: 22px;
+  }
+
+  .artikel-daftar-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 }
-
-/* ── Tablet (768px) ────────────────── */
-@media screen and (max-width: 768px) {
-    .artikel {
-        margin: 40px 32px;
-    }
-
-    .artikel-title {
-        font-size: 26px;
-    }
-
-    .artikel .artikel-list .col-sm-4 {
-        width: 50%;
-    }
-}
-
-@media screen and (max-width:540px) {
-
-    .artikel{
-        margin: 40px 16px;
-    }
-    
-    
-    .artikel-title{
-        font-size: 24px;
-        margin: 0;
-    }
-
-    .artikel .artikel-list .row{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        margin-top: 0;
-    }
-    .artikel  .card-body {
-        border: 1px solid #e2e2e2;
-        flex-direction: column;
-        display: flex;
-        padding: 12px;
-        border-radius: 12px;
-        padding: 8px;
-
-    }
-    .artikel    .col-sm-4{
-        display: flex;
-        padding: 12px;
-    }
-    .card-body img{
-        width: 100%;
-        border-radius: 12px;
-    }
-    
-    .artikel .bt1 {
-        display: none;
-      }
-
-    .artikel .bt2{
-        display: block;
-        margin-top: 12px;
-    }
-
-    .artikel .artikel-list{
-        margin:0;
-    }
-    .artikel .card-text{
-        overflow-y: hidden;
-        font-size: 16px;
-        color: #78828A;
-        margin-bottom: 16px;
-    }
-    
-    .artikel-list .card-title{
-        color: #121212;
-        margin: 0;
-        font-size: 18px;
-    }
-
-    .btn-viewmore{
-        width: 100%;
-    }
-    
-    .btn-more{
-        height: 40px;
-        width: 100%;
-        border-radius: 8px;
-        align-items: center;
-        
-    }
-}
-

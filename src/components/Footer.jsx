@@ -23,7 +23,6 @@ export const Footer = () => {
             <h6 className="title">Fitur</h6>
             <div className="fitur-item">
               <Link to="/cari-dokter">Booking Dokter</Link>
-              <Link to="/toko">Toko Obat</Link>
               <Link to="/artikel">Artikel</Link>
             </div>
           </div>

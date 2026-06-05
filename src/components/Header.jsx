@@ -1,22 +1,18 @@
 import { NavLink, Link } from "react-router-dom";
 import {
-  HiShoppingCart,
   HiChevronDown,
   HiMenu,
   HiX,
   HiHome,
   HiSearch,
   HiDocumentText,
-  HiShoppingBag,
 } from "react-icons/hi";
-import React, { useState, useContext, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "../css/header.css";
 import Logo from "../assets/logo.png";
 import "../globalstyle.css";
-import { ProductContext } from '../context/ProductContext';
 
 export const Header = () => {
-  const { cartItems } = useContext(ProductContext);
   const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
   // Simple boolean toggles — no fragile click counter
@@ -48,12 +44,10 @@ export const Header = () => {
     window.location.reload();
   };
 
-  const totalCartItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const navItems = [
     { to: "/", label: "Dashboard", icon: HiHome, end: true },
     { to: "/cari-dokter", label: "Dokter", icon: HiSearch },
     { to: "/artikel", label: "Artikel", icon: HiDocumentText },
-    { to: "/toko", label: "Toko", icon: HiShoppingBag },
   ];
 
   return (
@@ -80,12 +74,6 @@ export const Header = () => {
         </div>
 
         <div className="icons">
-          <NavLink to="/cart" className="cart-icon">
-            <HiShoppingCart />
-            {totalCartItems > 0 && (
-              <span className="cart-item-count">{totalCartItems}</span>
-            )}
-          </NavLink>
 
           <div className="button-header">
             {!loggedInUser ? (

@@ -6,14 +6,10 @@ import DokterDetail from '../pages/ProfilDokter';
 import Home from '../pages/home';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
-import Toko from '../pages/toko';
 
-import Cart from '../components/cart';
 import ChatContainer from '../components/ChatContainer';
 import DetailArtikel from '../components/DetailArtikel';
 import OrderDokter from '../components/Order-Dokter';
-import OrderSukses from '../components/OrderSukses';
-import ProductList from '../components/ProductList';
 import SuksesDokter from '../components/SuksesDokter';
 
 const NotFound = () => <h1>404 - Halaman tidak ditemukan</h1>;
@@ -24,17 +20,13 @@ const AppRoutes = () => {
       <Route path="/" element={<Home />} />
       <Route path="/cari-dokter" element={<CariDokter />} />
       <Route path="/artikel" element={<Artikel />} />
-      <Route path="/toko" element={<Toko />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/profil-dokter/:id" element={<DokterDetail />} />
       <Route path="/order-dokter/:id" element={<OrderDokter />} />
-      <Route path="/cart" element={<Cart />} />
       <Route path="/sukses-order-dokter" element={<SuksesDokter />} />
       <Route path="/chat" element={<ChatContainer />} />
-      <Route path="/sukses-order" element={<OrderSukses />} />
       <Route path="/detail-artikel/:articleId" element={<DetailArtikel />} />
-      <Route path="/:penyakit" element={<ProductList />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

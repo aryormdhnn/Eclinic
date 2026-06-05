@@ -8,8 +8,7 @@ export const BannerDaftar = () => {
     <div>
       <div className="daftar">
         <h4 className="daftar-title">
-          Daftar sekarang dan nikmati konsultasi medis online dengan dokter
-          terpercaya!
+          Daftar sekarang untuk memulai sesi tanya dokter spesialis secara instan di eClinic!
         </h4>
         <form>
           <label htmlFor="email"></label>
@@ -21,7 +20,7 @@ export const BannerDaftar = () => {
             placeholder="Masukkan Email Anda"
           />
           <button className="btn btn-success" type="submit">
-            Konsultasi Sekarang
+            Mulai Konsultasi
           </button>
         </form>
       </div>

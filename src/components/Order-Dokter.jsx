@@ -31,6 +31,7 @@ const OrderDokter = () => {
           `https://64527770a2860c9ed40d2a69.mockapi.io/doctor/${id}`
         );
         setUserDetail(response.data);
+        setTotalPrice(response.data.price);
       } catch (error) {
         console.log(error);
       }
@@ -141,21 +142,25 @@ const OrderDokter = () => {
       <div className="total-order">
         <h5>Total Pembayaran</h5>
         <div className="total-item">
-          <p>Biaya Transaksi</p>
+          <p>Biaya Sesi Konsultasi</p>
           <p>
-           <span>Rp. {(userDetail.price* 1000).toLocaleString()}</span>
+           <span>Rp {(userDetail.price * 1000).toLocaleString('id-ID')}</span>
           </p>
         </div>
         <div className="total-item">
-          <p>Promo</p>
-          <p>{priceDiscount}</p>
+          <p>Diskon Promo</p>
+          <p>
+           <span>- Rp {(priceDiscount * 1000).toLocaleString('id-ID')}</span>
+          </p>
         </div>
         <div className="total-item">
-          <p>Total Harga</p>
-          <p>{totalPrice}</p>
+          <p>Total Pembayaran</p>
+          <p>
+           <span>Rp {(totalPrice * 1000).toLocaleString('id-ID')}</span>
+          </p>
         </div>
         <button className="button-form-order" onClick={handleSubmit}>
-          Submit
+          Bayar & Mulai Konsultasi
         </button>
       </div>
     </div>

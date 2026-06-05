@@ -46,7 +46,7 @@ export const Header = () => {
 
   const navItems = [
     { to: "/", label: "Dashboard", icon: HiHome, end: true },
-    { to: "/cari-dokter", label: "Dokter", icon: HiSearch },
+    { to: "/cari-dokter", label: "Tanya Dokter", icon: HiSearch },
     { to: "/artikel", label: "Artikel", icon: HiDocumentText },
   ];
 
@@ -57,7 +57,7 @@ export const Header = () => {
           <div className="menubar">
             <Link to="/" className="brand-link">
               <img src={Logo} alt="eClinic Logo" className="logo" />
-              <span>eClinic</span>
+              <span>eClinic Telemedicine</span>
             </Link>
             <div className="menu men-nav">
               {navItems.map(({ to, label, icon: Icon, end }) => (

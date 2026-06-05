@@ -13,7 +13,7 @@ export const Footer = () => {
             <img src={Logo} alt="eClinic Logo" className="logo-footer" />
           </Link>
           <p className="company-item" id="description">
-            Medkit berkomitmen untuk menyediakan layanan telemedicine yang aman,
+            eClinic berkomitmen untuk menyediakan layanan tanya dokter spesialis dan telekonsultasi chat online yang aman,
             andal, dan terjangkau bagi semua orang.
           </p>
         </div>
@@ -22,7 +22,7 @@ export const Footer = () => {
           <div className="fitur">
             <h6 className="title">Fitur</h6>
             <div className="fitur-item">
-              <Link to="/cari-dokter">Booking Dokter</Link>
+              <Link to="/cari-dokter">Tanya Dokter</Link>
               <Link to="/artikel">Artikel</Link>
             </div>
           </div>

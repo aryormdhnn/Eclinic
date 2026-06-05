@@ -22,28 +22,27 @@ const Home = () => {
       <section className="hero-banner">
         <div className="row align-items-center hero-row">
           <div className="col-lg-6 hero-text-col">
-            <div className="hero-badge">Aplikasi Telemedicine Terpercaya</div>
+            <div className="hero-badge">Konsultasi Dokter Online 24/7</div>
             <h1 className="hero-title">
-              Dapatkan Konsultasi Kesehatan <span className="hero-highlight">Kapan Saja</span>
+              Tanya Dokter Spesialis <span className="hero-highlight">Kapan Saja, Di Mana Saja</span>
             </h1>
             <p className="hero-description">
-              Nikmati kemudahan berkonsultasi langsung dengan dokter spesialis berlisensi kami. 
-              Cepat, aman, dan tanpa perlu mengantre lama di rumah sakit.
+              Hubungi dokter spesialis berlisensi secara instan melalui chat medis atau video call online. Respons cepat, aman, dan tanpa perlu membuat janji temu fisik.
             </p>
             <div className="hero-actions">
               <Link to="/cari-dokter" className="btn btn-primary-hero">
-                Cari Dokter Sekarang <FaArrowRight className="btn-icon" />
+                Mulai Tanya Dokter <FaArrowRight className="btn-icon" />
               </Link>
             </div>
           </div>
           <div className="col-lg-6 hero-img-col text-center">
             <div className="hero-img-wrapper">
-              <img src={ImageCover} alt="Dokter Konsultasi Online" className="hero-img" />
+              <img src={ImageCover} alt="Tanya Dokter Online" className="hero-img" />
               <div className="hero-stat-card">
                 <div className="stat-icon"><FaUserMd /></div>
                 <div>
                   <strong>500+</strong>
-                  <span>Dokter Spesialis</span>
+                  <span>Dokter Online</span>
                 </div>
               </div>
             </div>
@@ -55,29 +54,29 @@ const Home = () => {
       <section className="services-section">
         <div className="section-header text-center">
           <span className="section-subtitle">Layanan Utama</span>
-          <h2 className="section-title">Kebutuhan Kesehatan Anda</h2>
+          <h2 className="section-title">Konsultasi Medis Online</h2>
           <p className="section-description">
-            Kami menyediakan solusi medis holistik untuk memudahkan Anda dan keluarga mendapatkan perawatan terbaik.
+            Kami menyediakan solusi telemedicine modern untuk memudahkan Anda berkonsultasi secara privat dengan dokter spesialis terbaik secara langsung.
           </p>
         </div>
         <div className="row services-grid">
           <div className="col-md-4">
             <div className="service-card">
-              <div className="service-icon consult"><FaCalendarAlt /></div>
-              <h4>Booking Dokter</h4>
-              <p>Jadwalkan sesi konsultasi video atau chat interaktif dengan dokter spesialis handal pilihan Anda.</p>
+              <div className="service-icon chat"><FaRegCommentDots /></div>
+              <h4>Chat Dokter Spesialis</h4>
+              <p>Mulai sesi chat interaktif instan untuk menanyakan keluhan kesehatan Anda langsung kepada ahlinya.</p>
               <Link to="/cari-dokter" className="service-link">
-                Buat Janji Temu <FaArrowRight />
+                Mulai Chat <FaArrowRight />
               </Link>
             </div>
           </div>
           <div className="col-md-4">
             <div className="service-card">
-              <div className="service-icon chat"><FaRegCommentDots /></div>
-              <h4>Super Chat Medis</h4>
-              <p>Tanya jawab langsung dan instan mengenai keluhan kesehatan Anda dengan tim dokter siaga kami.</p>
-              <Link to="/chat" className="service-link">
-                Konsultasi Sekarang <FaArrowRight />
+              <div className="service-icon consult"><FaCalendarAlt /></div>
+              <h4>Panggilan Video Medis</h4>
+              <p>Lakukan sesi video call online tatap muka untuk konsultasi visual yang lebih mendalam dengan dokter kami.</p>
+              <Link to="/cari-dokter" className="service-link">
+                Mulai Video Call <FaArrowRight />
               </Link>
             </div>
           </div>

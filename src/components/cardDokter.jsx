@@ -47,8 +47,8 @@ const UserList = () => {
                 <div className="card-price">
                   Mulai Dari <span className="price-tag">Rp {(user.price * 1000).toLocaleString('id-ID')}</span>
                 </div>
-                <Link className="btn btn-consult-now" to={`/profil-dokter/${user.id}`}>
-                  Mulai Konsultasi
+                 <Link className="btn btn-consult-now" to={`/profil-dokter/${user.id}`}>
+                  Chat Sekarang
                 </Link>
               </div>
             </div>

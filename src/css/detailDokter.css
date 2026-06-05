@@ -222,14 +222,12 @@
     cursor: pointer;
 }
 .profil-dokter input{
-
     border-radius: 8px;
-    background-color:rgba(0, 163, 118, 1);
-
+    background-color: var(--color-brand-primary);
 }
 
 .profil-dokter label:hover{
-    border: 1px solid rgba(0, 163, 118, 1);
+    border: 1px solid var(--color-brand-primary);
     background-color: #fff;
 }
 
@@ -237,8 +235,8 @@
     width: 100%;
     height: 48px;
     margin-top: 8px;
-    background-color:rgba(0, 163, 118, 1);
-    border: rgb(27, 190, 117);
+    background-color: var(--color-brand-primary);
+    border: 1px solid var(--color-brand-primary);
     border-radius: 8px;
     font-size: 14px;
     font-weight: 500;
@@ -254,8 +252,8 @@
     width: 100%;
     height: 48px;
     margin-top: 8px;
-    background-color:rgb(137, 197, 180);
-    border: rgb(27, 190, 117);
+    background-color: #b3cfff;
+    border: 1px solid #b3cfff;
     border-radius: 8px;
     font-size: 14px;
     font-weight: 500;
@@ -269,13 +267,12 @@
 {
     height: 48px;
     margin-top: 8px;
-    color:rgba(0, 163, 118, 1);
-    border: 1px solid rgb(27, 190, 117);
+    color: var(--color-brand-primary);
+    border: 1px solid var(--color-brand-primary);
     border-radius: 8px;
     font-size: 14px;
     font-weight: 500;
     background-color: white;
- 
 }
 
 .load{
@@ -563,4 +560,70 @@
         margin-bottom: 4px;
     }
     
+}
+
+/* ── Tanya Dokter Status & Info Styles ─────────────────────────────────── */
+.doctor-header-status {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+}
+
+.status-badge-online {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: rgba(39, 174, 96, 0.1);
+    color: #27ae60;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 99px;
+    height: fit-content;
+    border: 1px solid rgba(39, 174, 96, 0.2);
+}
+
+.pulsing-dot-green {
+    width: 8px;
+    height: 8px;
+    background-color: #27ae60;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    animation: pulse-green-glow 1.8s infinite ease-in-out;
+}
+
+@keyframes pulse-green-glow {
+    0% {
+        box-shadow: 0 0 0 0 rgba(39, 174, 96, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 6px rgba(39, 174, 96, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(39, 174, 96, 0);
+    }
+}
+
+.instant-consult-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    background-color: var(--color-brand-light);
+    border: 1px solid rgba(0, 98, 255, 0.15);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: #004ecc;
+    line-height: 1.4;
+}
+
+.info-icon-blue {
+    color: var(--color-brand-primary);
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 1px;
 }

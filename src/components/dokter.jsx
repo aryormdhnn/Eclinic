@@ -99,7 +99,7 @@ const DoctorList = () => {
             type="text"
             value={searchKeyword}
             onChange={handleSearch}
-            placeholder="Cari nama dokter spesialis..."
+            placeholder="Cari nama dokter spesialis untuk chat online..."
             aria-label="Cari nama dokter"
           />
           {searchKeyword && (
@@ -205,7 +205,7 @@ const DoctorList = () => {
                         Mulai Dari <span className="price-tag">Rp {(user.price * 1000).toLocaleString('id-ID')}</span>
                       </div>
                       <Link className="btn btn-consult-now" to={`/profil-dokter/${user.id}`}>
-                        Mulai Konsultasi
+                        Chat Sekarang
                       </Link>
                     </div>
                   </div>

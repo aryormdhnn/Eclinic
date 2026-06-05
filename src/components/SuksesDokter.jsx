@@ -8,10 +8,10 @@ export const SuksesDokter = () => {
     <div>
       <div className="suksesorder">
         <img src={sukses} alt="" className="image-sukses" />
-        <h2>Selamat Pembayaran anda telah Terverifikasi</h2>
-        <h5>Anda akan di arahkan langsung ke halaman konsultasi</h5>
+        <h2>Sesi Konsultasi Anda Telah Aktif!</h2>
+        <h5>Pembayaran Anda terverifikasi. Dokter spesialis Anda siap melayani Anda sekarang di ruang obrolan virtual.</h5>
         <Button variant="primary" className='bt-sukses' href="/chat">
-          Konsultasi
+          Mulai Chat Sekarang
         </Button>
       </div>
     </div>

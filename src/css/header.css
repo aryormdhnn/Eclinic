@@ -8,10 +8,6 @@ p {
 }
 
 .navbar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
   padding: 14px 100px;
   box-sizing: border-box;
@@ -21,6 +17,16 @@ p {
   background: rgba(255, 255, 255, 0.94);
   border-bottom: 1px solid #e5eee9;
   backdrop-filter: blur(14px);
+}
+
+.navbar-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .menubar {

@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import { Link, useNavigate } from 'react-router-dom';
 import '../css/cart.css';
@@ -32,17 +31,8 @@ const Cart = () => {
     navigate('/sukses-order');
   };
 
-  const onSuccess = (details, data) => {
-    console.log('Payment succeeded:', details, data);
-    handleCheckout();
-  };
-
-  const onCancel = (data) => console.log('Payment canceled:', data);
-  const onError = (err) => console.error('Error during payment:', err);
-
   return (
-    <PayPalScriptProvider options={{ 'client-id': 'AZW_HIbX9o5c4fcxKEmvFqRqF6YRoedmZXM3UGQT287B_jFilCiFn19r6BOmlE3X4m8czW1l8X3urvW9' }}>
-      <div>
+    <div>
         <div className="cart">
           <Breadcrumb>
             <Breadcrumb.Item>
@@ -126,29 +116,15 @@ const Cart = () => {
                           {formatPrice(getTotalPrice())}
                         </strong>
                       </p>
-                      <div className="paypalbutton">
-                        <PayPalButtons
-                          style={{ layout: 'horizontal' }}
-                          createOrder={(_data, actions) =>
-                            actions.order.create({
-                              purchase_units: [
-                                {
-                                  amount: {
-                                    value: getTotalPrice().toFixed(2),
-                                    currency_code: 'USD',
-                                  },
-                                },
-                              ],
-                            })
-                          }
-                          onApprove={(_data, actions) =>
-                            actions.order
-                              .capture()
-                              .then((details) => onSuccess(details, _data))
-                          }
-                          onCancel={onCancel}
-                          onError={onError}
-                        />
+                      <div className="checkout-action mt-4">
+                        <Button
+                          variant="success"
+                          className="w-100 py-3 btn-checkout"
+                          onClick={handleCheckout}
+                          style={{ borderRadius: '12px', fontWeight: '600', fontSize: '16px' }}
+                        >
+                          Konfirmasi Pembayaran
+                        </Button>
                       </div>
                     </>
                   )}
@@ -243,7 +219,6 @@ const Cart = () => {
           </div>
         </div>
       </div>
-    </PayPalScriptProvider>
   );
 };
 

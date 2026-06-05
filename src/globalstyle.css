@@ -1,7 +1,63 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap');
 
+:root {
+  --font-sans: Inter, "DM Sans", Arial, sans-serif;
+
+  --color-text-primary: #101827;
+  --color-text-secondary: #69768d;
+  --color-text-muted: #6c788f;
+  --color-surface-app: #f8fafc;
+  --color-surface-soft: #eef2f7;
+  --color-surface-card: #ffffff;
+  --color-border-soft: #edf2f8;
+  --color-brand-blue: #3596ff;
+  --color-brand-blue-strong: #5898ff;
+  --color-accent-orange: #ff7a00;
+  --color-nav-dark: #071326;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 22px;
+  --radius-pill: 999px;
+
+  --text-xs: 14px;
+  --text-sm: 16px;
+  --text-md: 18px;
+  --text-lg: 20px;
+  --text-xl: 21px;
+  --text-2xl: 22px;
+  --text-3xl: 24px;
+  --text-section: 25px;
+
+  --line-tight: 1.1;
+  --line-title: 1.2;
+  --line-body: 1.35;
+  --line-relaxed: 1.45;
+
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-extrabold: 800;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text-primary);
+  background: var(--color-surface-soft);
 }

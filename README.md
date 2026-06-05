@@ -27,7 +27,6 @@ Proyek ini dikembangkan sebagai Final Project oleh tim **FE-11**.
 | [React Icons](https://react-icons.github.io/react-icons/) | ^4.9 | Ikon komponen |
 | [Axios](https://axios-http.com/) | ^1.4 | HTTP client |
 | [Firebase](https://firebase.google.com/) | ^9.22 | Auth & database (configured) |
-| [@paypal/react-paypal-js](https://github.com/paypal/react-paypal-js) | ^7.8 | PayPal payment gateway |
 | [Socket.io-client](https://socket.io/) | ^4.6 | Chat real-time |
 
 **Data API:** [MockAPI](https://mockapi.io/) digunakan untuk data dokter, produk, artikel, dan user.
@@ -47,7 +46,7 @@ Proyek ini dikembangkan sebagai Final Project oleh tim **FE-11**.
 - Kategori obat berdasarkan jenis penyakit
 - Pencarian produk
 - Keranjang belanja dengan update kuantitas
-- Checkout via PayPal
+- Checkout belanja langsung
 
 ### 📰 Artikel Kesehatan
 - Daftar artikel kesehatan
@@ -150,9 +149,6 @@ npm run build
 Untuk production, buat file `.env` di root proyek:
 
 ```env
-# PayPal (ganti dengan Client ID production Anda)
-VITE_PAYPAL_CLIENT_ID=your_paypal_client_id_here
-
 # Firebase (isi dari Firebase Console)
 VITE_FIREBASE_API_KEY=your_api_key
 VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain

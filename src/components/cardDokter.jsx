@@ -1,8 +1,7 @@
-// import dokter1 from '../assets/dokter/dokter1.png';
 import '../css/carddokter.css';
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
-
+import { FaStar } from 'react-icons/fa';
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -13,51 +12,50 @@ const UserList = () => {
       .then((data) => setUsers(data))
       .catch((error) => console.log(error));
   }, []);
+
   const displayedUsers = users.slice(0, 4);
 
-  
   return (
-
-<div className="dokterRekomendasi">
-<div className="row dokter">
-          <div className="col-sm-10">
-            <h3 className="rekomendasi-title">Dokter Rekomendasi</h3>
-          </div>
-          <div className="col-sm-2 text-end">
-            <a href="/cari-dokter" className="btn btn-success">
-              Lihat selengkapnya
-            </a>
-          </div>
+    <div className="dokterRekomendasi">
+      <div className="row dokter-header-row align-items-center">
+        <div className="col-8">
+          <h3 className="rekomendasi-title">Rekomendasi Dokter Spesialis</h3>
+        </div>
+        <div className="col-4 text-end">
+          <Link to="/cari-dokter" className="btn-view-all">
+            Lihat Semua
+          </Link>
+        </div>
       </div>
-      <div className="row dokter-daftar">
+      <div className="row dokter-daftar-grid">
         {displayedUsers.map((user, index) => (
-          <div key={index} className="col-sm-3">
-            <div className="card border-0">
-              <div className="card-body">
-                <div className="row">
-                  <div className="comp-1 col-sm-12">
-                    <img
-                      src={user.avatar}
-                      alt="Gambar"
-                      className="dokter-image"
-                    />
-                  </div>
-                  <div className="comp-2 col-sm-12">
-                    <h5 className="card-title">dr. {user.name.substring(0, 12)}</h5>
-                    <p className="card-text">{user.job}</p>
-                    <div className="card-price">Mulai Dari <span>Rp. {(user.price* 1000).toLocaleString()}</span></div>
-                    <Link  className="btn btn-success" to={`/profil-dokter/${user.id}`}>Mulai Konsultasi</Link>
-
-                  </div>
+          <div key={user.id || index} className="col-xl-3 col-lg-4 col-md-6 col-sm-12 card-col-wrapper">
+            <div className="card border-0 doctor-recommend-card">
+              <div className="doctor-card-img-wrapper">
+                <img
+                  src={user.avatar}
+                  alt={`dr. ${user.name}`}
+                  className="dokter-image"
+                />
+                <div className="doctor-card-rating">
+                  <FaStar className="star-icon" /> <span>{user.rating || "4.8"}</span>
                 </div>
+              </div>
+              <div className="doctor-card-content">
+                <h5 className="card-title">dr. {user.name.substring(0, 16)}</h5>
+                <p className="card-text">{user.job}</p>
+                <div className="card-price">
+                  Mulai Dari <span className="price-tag">Rp {(user.price * 1000).toLocaleString('id-ID')}</span>
+                </div>
+                <Link className="btn btn-consult-now" to={`/profil-dokter/${user.id}`}>
+                  Mulai Konsultasi
+                </Link>
               </div>
             </div>
           </div>
         ))}
       </div>
     </div>
-
-    
   );
 };
 

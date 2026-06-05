@@ -3,4 +3,3 @@
  * Barrel export for layout components — import from 'components/layout'
  */
 export { default as PageLayout } from './PageLayout';
-export { default as MobileAppLayout } from './MobileAppLayout';

@@ -6,8 +6,8 @@ import "../globalstyle.css";
 export const BannerDaftar = () => {
   return (
     <div>
-      <div class="daftar">
-        <h4 class="daftar-title">
+      <div className="daftar">
+        <h4 className="daftar-title">
           Daftar sekarang dan nikmati konsultasi medis online dengan dokter
           terpercaya!
         </h4>

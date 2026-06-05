@@ -1,15 +1,16 @@
 import { BrowserRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import { Header } from './components/Header';
 import AppProviders from './providers/AppProviders';
 import AppRoutes from './routes/AppRoutes';
-import { MobileAppLayout } from './components/layout';
 
 const AppContent = () => {
   return (
-    <MobileAppLayout>
+    <>
+      <Header />
       <AppRoutes />
-    </MobileAppLayout>
+    </>
   );
 };
 

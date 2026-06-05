@@ -11,7 +11,6 @@ import {
 import '../css/home.css';
 import ImageCover from '../assets/dokter-cover.png';
 import CardDokter from '../components/cardDokter';
-import Testimonial from '../components/testimonial';
 import Artikel from '../components/artikel';
 import BannerDaftar from '../components/BannerDaftar';
 import Footer from '../components/Footer';
@@ -100,10 +99,7 @@ const Home = () => {
         <CardDokter />
       </div>
 
-      {/* 4. Testimonials Section */}
-      <div className="home-sub-section">
-        <Testimonial />
-      </div>
+
 
       {/* 5. Health Articles Section */}
       <div className="home-sub-section">

@@ -35,12 +35,7 @@
   text-decoration: underline;
 }
 
-/* Grid Container - Light Grey Background */
 .dokter-daftar-grid {
-  background-color: #f8fafc; /* Abu-abu muda */
-  border: 1px solid #edf2f7;
-  border-radius: 24px;
-  padding: 36px 20px;
   margin: 0;
   gap: 0;
 }
@@ -176,10 +171,6 @@
   .dokterRekomendasi {
     margin: 60px auto;
   }
-  
-  .dokter-daftar-grid {
-    padding: 24px 12px;
-  }
 }
 
 @media screen and (max-width: 576px) {
@@ -189,12 +180,6 @@
 
   .dokter-header-row .rekomendasi-title {
     font-size: 22px;
-  }
-
-  .dokter-daftar-grid {
-    background-color: transparent;
-    border: none;
-    padding: 0;
   }
 
   .card-col-wrapper {

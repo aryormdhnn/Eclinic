@@ -3,10 +3,11 @@
    ========================================================================== */
 
 .dokterRekomendasi {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 80px auto;
-  padding: 0 20px;
+  padding: 0 100px;
   font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
 }
 
 /* Header Row */
@@ -172,6 +173,7 @@
 @media screen and (max-width: 992px) {
   .dokterRekomendasi {
     margin: 60px auto;
+    padding: 0 48px;
   }
   
   .dokter-daftar-grid {
@@ -183,6 +185,7 @@
 @media screen and (max-width: 576px) {
   .dokterRekomendasi {
     margin: 40px auto;
+    padding: 0 16px;
   }
 
   .dokter-header-row .rekomendasi-title {

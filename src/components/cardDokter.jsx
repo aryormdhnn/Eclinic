@@ -27,9 +27,9 @@ const UserList = () => {
           </Link>
         </div>
       </div>
-      <div className="row dokter-daftar-grid">
+      <div className="dokter-daftar-grid">
         {displayedUsers.map((user, index) => (
-          <div key={user.id || index} className="col-xl-3 col-lg-4 col-md-6 col-sm-12 card-col-wrapper">
+          <div key={user.id || index} className="card-col-wrapper">
             <div className="card border-0 doctor-recommend-card">
               <div className="doctor-card-img-wrapper">
                 <img

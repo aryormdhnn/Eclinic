@@ -36,12 +36,14 @@
 }
 
 .dokter-daftar-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
   margin: 0;
-  gap: 0;
 }
 
 .card-col-wrapper {
-  padding: 12px;
+  padding: 0;
 }
 
 /* Doctor Card - Premium White Card */
@@ -171,6 +173,11 @@
   .dokterRekomendasi {
     margin: 60px auto;
   }
+  
+  .dokter-daftar-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
 }
 
 @media screen and (max-width: 576px) {
@@ -182,7 +189,12 @@
     font-size: 22px;
   }
 
+  .dokter-daftar-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
   .card-col-wrapper {
-    padding: 8px 0;
+    padding: 0;
   }
 }

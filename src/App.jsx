@@ -1,19 +1,15 @@
-import { BrowserRouter, useLocation } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { Header } from './components/Header';
 import AppProviders from './providers/AppProviders';
 import AppRoutes from './routes/AppRoutes';
+import { MobileAppLayout } from './components/layout';
 
 const AppContent = () => {
-  const location = useLocation();
-  const isHome = location.pathname === '/';
-
   return (
-    <>
-      {!isHome && <Header />}
+    <MobileAppLayout>
       <AppRoutes />
-    </>
+    </MobileAppLayout>
   );
 };
 

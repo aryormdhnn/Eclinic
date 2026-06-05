@@ -44,37 +44,23 @@ const doctors = [
 const Home = () => {
 
     return (
-        <main className="mobile-home-page">
-            <div className="phone-home">
-                <header className="home-top">
-                    <div className="status-row" aria-hidden="true">
-                        <span>9:41</span>
-                        <div className="status-icons">
-                            <span className="signal-bars">
-                                <i />
-                                <i />
-                                <i />
-                            </span>
-                            <span className="wifi-icon" />
-                            <span className="battery-icon" />
-                        </div>
+        <div>
+            <header className="home-top" style={{ paddingTop: '8px' }}>
+                <div className="location-row">
+                    <div>
+                        <p>Current Location</p>
+                        <button className="location-button" type="button">
+                            Kasihan, Bantul
+                            <HiChevronDown />
+                        </button>
                     </div>
-
-                    <div className="location-row">
-                        <div>
-                            <p>Current Location</p>
-                            <button className="location-button" type="button">
-                                Kasihan, Bantul
-                                <HiChevronDown />
-                            </button>
-                        </div>
-                        <div className="top-actions">
-                            <Link to="/artikel" className="circle-action" aria-label="Notifikasi">
-                                <FaBell />
-                            </Link>
-                        </div>
+                    <div className="top-actions">
+                        <Link to="/artikel" className="circle-action" aria-label="Notifikasi">
+                            <FaBell />
+                        </Link>
                     </div>
-                </header>
+                </div>
+            </header>
 
                 <section className="home-section appointment-section">
                     <h1>Appointment Today</h1>
@@ -135,23 +121,7 @@ const Home = () => {
 
 
 
-                <nav className="bottom-app-nav" aria-label="Navigasi utama">
-                    <NavLink to="/" end className={({ isActive }) => (isActive ? 'active' : '')}>
-                        <FaHome />
-                        <span>Home</span>
-                    </NavLink>
-                    <NavLink to="/cari-dokter">
-                        <FaCalendarAlt />
-                    </NavLink>
-                    <NavLink to="/chat">
-                        <FaRegCommentDots />
-                    </NavLink>
-                    <NavLink to="/login">
-                        <FaRegUser />
-                    </NavLink>
-                </nav>
-            </div>
-        </main>
+        </div>
     );
 };
 

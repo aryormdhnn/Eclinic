@@ -61,3 +61,145 @@ body {
   color: var(--color-text-primary);
   background: var(--color-surface-soft);
 }
+
+/* ==========================================================================
+   Mobile Web App Global Layout Overrides (Forcing Mobile view inside .phone-home)
+   ========================================================================== */
+
+/* Remove desktop margins and use clean padding inside the PWA frame */
+.phone-home .hal-dokter {
+  margin: 0 20px !important;
+  margin-top: 1.5rem !important;
+}
+
+.phone-home .bread-dokter {
+  margin: 0px 20px !important;
+  margin-top: 20px !important;
+}
+
+.phone-home .bread-dokter h1 {
+  font-size: 24px !important;
+  margin-bottom: 20px !important;
+}
+
+/* Force mobile specialist selection layout inside PWA frame */
+.phone-home .fil1 {
+  display: none !important;
+}
+
+.phone-home .fil2 {
+  display: flex !important;
+  width: 100% !important;
+}
+
+.phone-home .res-filter {
+  display: flex !important;
+}
+
+/* Force 2 columns grid for doctor cards inside PWA frame */
+.phone-home .dokterRekomendasi .main-row {
+  background-color: transparent !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+  justify-content: center !important;
+  height: auto !important;
+  padding: 1rem 0 !important;
+  border: none !important;
+}
+
+.phone-home .dokterRekomendasi .main {
+  width: calc(50% - 6px) !important;
+  flex: 0 0 calc(50% - 6px) !important;
+  max-width: calc(50% - 6px) !important;
+  height: auto !important;
+  margin-bottom: 0 !important;
+  display: flex !important;
+}
+
+.phone-home .dokterRekomendasi .card {
+  width: 100% !important;
+}
+
+/* Details and forms styling inside PWA frame */
+.phone-home .profil-dokter {
+  margin: 0 20px !important;
+}
+
+.phone-home .profil-detail {
+  width: 100% !important;
+  padding-left: 0 !important;
+  gap: 1rem !important;
+}
+
+.phone-home .order-dokter {
+  display: none !important;
+}
+
+.phone-home .profil-detail .card-order {
+  display: flex !important;
+  padding: 16px !important;
+}
+
+.phone-home .card-profil-dokter {
+  gap: 12px !important;
+  height: auto !important;
+}
+
+.phone-home .card-profil-dokter .card-profil-img {
+  width: 35% !important;
+}
+
+.phone-home .card-profil-body h3 {
+  font-size: 18px !important;
+}
+
+.phone-home .card-profil-body p {
+  font-size: 14px !important;
+}
+
+.phone-home .card-profil-detail p {
+  font-size: 14px !important;
+}
+
+.phone-home .card-profil-detail h3 {
+  font-size: 18px !important;
+}
+
+.phone-home .profil-dokter label {
+  font-size: 14px !important;
+  padding: 12px !important;
+}
+
+.phone-home .profil-dokter form .button-form,
+.phone-home .profil-dokter form .disabled,
+.phone-home .profil-dokter form button.clicked {
+  height: 48px !important;
+  font-size: 14px !important;
+}
+
+/* Chat box sizing inside PWA frame */
+.phone-home .chat-box {
+  margin: 0 20px !important;
+  margin-top: 12px !important;
+  padding: 12px !important;
+  border: 1px solid #E5E5E5 !important;
+  margin-bottom: 2rem !important;
+}
+
+/* Article detail and list inside PWA frame */
+.phone-home .banner-article {
+  margin: 0 16px !important;
+}
+
+.phone-home .detailartikel {
+  margin: 0 16px !important;
+}
+
+.phone-home .detailartikel h2 {
+  font-size: 24px !important;
+}
+
+.phone-home .detailartikel p {
+  font-size: 16px !important;
+}

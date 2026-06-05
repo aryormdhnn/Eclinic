@@ -15,7 +15,7 @@
    ───────────────────────────────────────────────────────────────────────── */
 .hero-banner {
   background: linear-gradient(135deg, #eaf6f2 0%, #f4fbf9 100%);
-  padding: 80px 120px;
+  padding: 80px 100px;
   position: relative;
 }
 
@@ -154,7 +154,7 @@
    2. Services Grid Section
    ───────────────────────────────────────────────────────────────────────── */
 .services-section {
-  padding: 80px 120px;
+  padding: 80px 100px;
   background-color: #ffffff;
 }
 

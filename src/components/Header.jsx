@@ -7,6 +7,7 @@ import {
   HiDocumentText,
   HiLogout,
   HiChevronDown,
+  HiChip,
 } from "react-icons/hi";
 import React, { useState, useRef, useEffect } from "react";
 import "../css/header.css";
@@ -40,6 +41,7 @@ export const Header = () => {
   const navItems = [
     { to: "/", label: "Beranda", icon: HiHome, end: true },
     { to: "/cari-dokter", label: "Tanya Dokter", icon: HiSearch },
+    { to: "/ai-dokter", label: "AI Dokter", icon: HiChip },
     { to: "/artikel", label: "Artikel", icon: HiDocumentText },
   ];
 

@@ -46,14 +46,19 @@ const ChatContainer = () => {
 
     fetchMessages();
 
-    // Realtime subscription — dengarkan INSERT baru
+    // Realtime subscription — dengarkan INSERT baru dari user LAIN
     const channel = supabase
       .channel('messages-channel')
       .on(
         'postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'messages' },
         (payload) => {
-          setChats((prev) => [...prev, payload.new]);
+          setChats((prev) => {
+            // Deduplikasi: jangan tambah jika ID sudah ada
+            const alreadyExists = prev.some((c) => c.id === payload.new.id);
+            if (alreadyExists) return prev;
+            return [...prev, payload.new];
+          });
         }
       )
       .subscribe();
@@ -71,14 +76,31 @@ const ChatContainer = () => {
     const text = message.trim();
     setMessage('');
 
-    const { error } = await supabase.from('messages').insert({
+    // Optimistic update: tampilkan pesan SEKARANG tanpa tunggu server
+    const tempId = `temp-${Date.now()}`;
+    const optimisticMsg = {
+      id: tempId,
       user_name: currentUser,
       message: text,
-    });
+      created_at: new Date().toISOString(),
+    };
+    setChats((prev) => [...prev, optimisticMsg]);
+
+    const { data, error } = await supabase
+      .from('messages')
+      .insert({ user_name: currentUser, message: text })
+      .select()
+      .single();
 
     if (error) {
-      // Jika gagal, kembalikan pesan ke input
+      // Jika gagal, hapus optimistic message dan kembalikan teks
+      setChats((prev) => prev.filter((c) => c.id !== tempId));
       setMessage(text);
+    } else if (data) {
+      // Ganti optimistic message dengan data asli dari server
+      setChats((prev) =>
+        prev.map((c) => (c.id === tempId ? data : c))
+      );
     }
 
     setIsSending(false);

@@ -12,6 +12,7 @@ import DetailArtikel from '../components/DetailArtikel';
 import OrderDokter from '../components/Order-Dokter';
 import SuksesDokter from '../components/SuksesDokter';
 import ProtectedRoute from '../components/ProtectedRoute';
+import AIDokterPage from '../pages/AIDokterPage';
 
 const NotFound = () => <h1>404 - Halaman tidak ditemukan</h1>;
 
@@ -41,6 +42,13 @@ const AppRoutes = () => {
       <Route path="/chat" element={
         <ProtectedRoute>
           <ChatContainer />
+        </ProtectedRoute>
+      } />
+
+      {/* AI Doctor Route */}
+      <Route path="/ai-dokter" element={
+        <ProtectedRoute>
+          <AIDokterPage />
         </ProtectedRoute>
       } />
 

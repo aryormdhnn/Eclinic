@@ -7,20 +7,23 @@ import Footer from '../components/Footer';
 const ProfilDokter = () => {
   return (
       <div>
- 
-        <div className="bread-dokter">
-         <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <Link to='/' className='bread-item'>Home </Link>
-            </li>
-            <li className="breadcrumb-item">
-              <Link to='/cari-dokter' className='bread-item'>Dokter / </Link>
-            </li>
-            <li className='bread-item-active'> Profil Dokter</li>
-          </ol>
-          <h1>Profil Dokter</h1>
+      <div className="page-hero-strip">
+        <div className="page-hero-inner">
+          <div className="bread-dokter">
+            <ol className="breadcrumb">
+              <li className="breadcrumb-item">
+                <Link to='/' className='bread-item'>Beranda</Link>
+              </li>
+              <li className="breadcrumb-item">
+                <Link to='/cari-dokter' className='bread-item'>Cari Dokter</Link>
+              </li>
+              <li className='breadcrumb-item bread-item-active'>Profil Dokter</li>
+            </ol>
+          </div>
+          <h1 className="page-hero-title">Profil Dokter</h1>
+          <p className="page-hero-sub">Detail spesialisasi, jadwal, dan konsultasi online.</p>
         </div>
-    
+      </div>
     <UserDetail />
     <Footer />
 

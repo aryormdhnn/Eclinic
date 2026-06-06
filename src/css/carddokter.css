@@ -16,15 +16,15 @@
 }
 
 .dokter-header-row .rekomendasi-title {
-  font-size: 28px;
-  font-weight: 800;
+  font-size: 24px;
+  font-weight: 500;
   color: #0d1e2d;
   margin: 0;
 }
 
 .dokter-header-row .btn-view-all {
   display: inline-block;
-  color: #00a376;
+  color: var(--color-brand-primary);
   font-weight: 700;
   font-size: 15px;
   text-decoration: none;
@@ -32,7 +32,7 @@
 }
 
 .dokter-header-row .btn-view-all:hover {
-  color: #008761;
+  color: var(--color-brand-hover);
   text-decoration: underline;
 }
 
@@ -62,8 +62,8 @@
 
 .doctor-recommend-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 15px 30px rgba(0, 163, 118, 0.08);
-  border-color: rgba(0, 163, 118, 0.15) !important;
+  box-shadow: 0 15px 30px rgba(0, 98, 255, 0.08);
+  border-color: rgba(0, 98, 255, 0.15) !important;
 }
 
 /* Image Wrapper */
@@ -152,12 +152,12 @@
   display: block;
   width: 100%;
   text-align: center;
-  background-color: #00a376 !important;
+  background-color: var(--color-brand-primary) !important;
   color: #ffffff !important;
   font-size: 14px;
   font-weight: 700;
   padding: 12px;
-  border-radius: 10px;
+  border-radius: var(--radius-pill);
   text-decoration: none;
   transition: all 0.2s ease;
   border: none;
@@ -165,8 +165,8 @@
 }
 
 .btn-consult-now:hover {
-  background-color: #008761 !important;
-  box-shadow: 0 4px 12px rgba(0, 163, 118, 0.2);
+  background-color: var(--color-brand-hover) !important;
+  box-shadow: 0 4px 12px rgba(0, 98, 255, 0.2);
 }
 
 /* ── Responsive breakpoints ────────────────────────────────────────────── */

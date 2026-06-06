@@ -19,7 +19,7 @@
   .send-button {
     width: 20%;
     height: 48px;
-    border-radius: 10px;
+    border-radius: var(--radius-pill);
     font-size: 15px;
   }
   
@@ -44,7 +44,7 @@
     .send-button {
       width: 20%;
       height: 32px;
-      border-radius: 10px;
+      border-radius: var(--radius-pill);
       font-size: 12px;
     }
   }

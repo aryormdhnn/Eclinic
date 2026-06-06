@@ -1,11 +1,14 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
+import { FaChevronLeft, FaInfoCircle } from 'react-icons/fa';
+import { supabase } from '../lib/supabaseClient';
 import '../globalstyle.css';
 import '../css/login.css';
 
+import logoEclinic from "../assets/logo.png";
+import loginIllustration from "../assets/login_illustration.png";
+
 const RegisterPage = () => {
-  const { register } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [username, setUsername] = useState('');
@@ -25,20 +28,21 @@ const RegisterPage = () => {
 
     setIsLoading(true);
     try {
-      const response = await fetch(
-        'https://6454643dc18adbbdfeb53cd7.mockapi.io/api/fe-11/user',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username, password, email }),
+      const { data, error: signUpError } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            username: username
+          }
         }
-      );
+      });
 
-      if (response.ok) {
-        register(username);
-        navigate('/');
+      if (signUpError) {
+        setError(signUpError.message);
       } else {
-        setError('Registrasi tidak berhasil. Coba lagi.');
+        // Successful registration
+        navigate('/');
       }
     } catch (err) {
       setError('Terjadi kesalahan. Coba lagi nanti.');
@@ -49,54 +53,76 @@ const RegisterPage = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className="register-form">
-        <h2>Register</h2>
+    <div className="auth-page-container">
+      <Link to="/" className="auth-back-home">
+        <FaChevronLeft /> Kembali ke Beranda
+      </Link>
 
-        {error && (
-          <div className="form-error" role="alert">
-            {error}
-          </div>
-        )}
+      {/* Center Card - Form */}
+      <div className="auth-card">
+        <div className="auth-logo">
+          <Link to="/">
+            <img src={logoEclinic} alt="eClinic Logo" />
+          </Link>
+        </div>
+        
+        <div className="auth-form-header">
+          <h2>Buat Akun Baru</h2>
+          <p>Lengkapi formulir di bawah ini untuk bergabung dengan eClinic.</p>
+        </div>
 
-        <div>
-          <label htmlFor="reg-username">Username:</label>
-          <input
-            type="text"
-            id="reg-username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            autoComplete="username"
-          />
-        </div>
-        <div>
-          <label htmlFor="reg-password">Password:</label>
-          <input
-            type="password"
-            id="reg-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete="new-password"
-          />
-        </div>
-        <div>
-          <label htmlFor="reg-email">Email:</label>
-          <input
-            type="email"
-            id="reg-email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            autoComplete="email"
-          />
-        </div>
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? 'Mendaftar...' : 'Register'}
-        </button>
-      </form>
+          <form onSubmit={handleSubmit}>
+            {error && (
+              <div className="auth-error" role="alert">
+                <FaInfoCircle /> {error}
+              </div>
+            )}
 
-      <p className="text-link">
-        Sudah memiliki akun? <Link to="/login">Masuk</Link>
-      </p>
+            <div className="auth-form-group">
+              <label htmlFor="reg-username">Username</label>
+              <input
+                type="text"
+                id="reg-username"
+                placeholder="Buat username Anda"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                autoComplete="username"
+              />
+            </div>
+            
+            <div className="auth-form-group">
+              <label htmlFor="reg-email">Email Address</label>
+              <input
+                type="email"
+                id="reg-email"
+                placeholder="contoh: budi@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                autoComplete="email"
+              />
+            </div>
+            
+            <div className="auth-form-group">
+              <label htmlFor="reg-password">Password</label>
+              <input
+                type="password"
+                id="reg-password"
+                placeholder="Minimal 6 karakter"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="new-password"
+              />
+            </div>
+
+            <button type="submit" className="auth-submit-btn" disabled={isLoading}>
+              {isLoading ? "Mendaftarkan..." : "Daftar Akun"}
+            </button>
+          </form>
+
+          <p className="auth-link-text">
+            Sudah memiliki akun? <Link to="/login">Masuk di sini</Link>
+          </p>
+      </div>
     </div>
   );
 };

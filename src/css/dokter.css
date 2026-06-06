@@ -1,67 +1,142 @@
 /* ==========================================================================
-   eClinic Search Doctor Page Overhaul Styles (dokter.css)
+   eClinic — Cari Dokter Page (dokter.css)
+   Design system: max font-weight 500, no bold
    ========================================================================== */
 
+/* ── Page wrapper ──────────────────────────────────────────────────────── */
 .cari-dokter-page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px 80px 20px;
+  min-height: 100vh;
+  background-color: #f8faff;
   font-family: 'Inter', sans-serif;
   color: #1a2530;
 }
 
-/* Breadcrumb & Header */
+/* ── Page hero strip ───────────────────────────────────────────────────── */
+.page-hero-strip {
+  background: #ffffff;
+  border-bottom: 1px solid #edf0f7;
+  padding: 40px 0 36px;
+}
+
+.page-hero-strip::before,
+.page-hero-strip::after {
+  display: none;
+}
+
+.page-hero-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ── Breadcrumb ─────────────────────────────────────────────────────────── */
 .bread-dokter {
-  margin-top: 40px;
-  margin-bottom: 32px;
+  margin-bottom: 16px;
 }
 
 .bread-dokter ol.breadcrumb {
   background: transparent;
   padding: 0;
-  margin-bottom: 12px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.bread-dokter .breadcrumb-item {
+  display: flex;
+  align-items: center;
+}
+
+.bread-dokter .breadcrumb-item + .breadcrumb-item::before {
+  content: '›';
+  color: #c4cdd9;
+  padding: 0;
+  margin: 0 4px;
+  font-size: 14px;
 }
 
 .bread-dokter .bread-item {
-  color: #78828a;
+  color: #a0aec0;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 400;
+  transition: color 0.2s;
 }
 
 .bread-dokter .bread-item:hover {
-  color: #00a376;
+  color: var(--color-brand-primary);
 }
 
 .bread-dokter .bread-item-active {
+  color: #5a6578;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+/* ── Hero text ──────────────────────────────────────────────────────────── */
+.page-hero-title {
+  font-size: 26px;
+  font-weight: 500;
   color: #0d1e2d;
-  font-weight: 700;
+  margin: 0 0 6px;
+  line-height: 1.2;
+  letter-spacing: -0.2px;
+}
+
+.page-hero-sub {
   font-size: 14px;
+  font-weight: 400;
+  color: #8a97aa;
+  margin: 0 0 20px;
+  line-height: 1.6;
 }
 
-.bread-dokter h1 {
-  font-size: 32px;
-  font-weight: 800;
-  color: #0d1e2d;
-  margin: 0;
+/* ── Hero stats chips ───────────────────────────────────────────────────── */
+.page-hero-stats {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────
-   1. Search & Filter Header Card
-   ───────────────────────────────────────────────────────────────────────── */
+.hero-stat-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #f8faff;
+  border: 1px solid #e4eaf8;
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #5a6578;
+}
+
+.hero-stat-chip-icon {
+  font-size: 11px;
+  color: var(--color-brand-primary);
+}
+
+/* ── Main content area ─────────────────────────────────────────────────── */
+.hal-dokter {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px 40px 80px;
+}
+
+/* ── Search & filter bar ───────────────────────────────────────────────── */
 .filter-header-card {
   background-color: #ffffff;
-  border: 1px solid #edf2f7;
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 8px 24px rgba(13, 30, 45, 0.03);
+  border: 1px solid #e4eaf5;
+  border-radius: 14px;
+  padding: 18px 24px;
+  box-shadow: 0 2px 12px rgba(13, 30, 45, 0.04);
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 24px;
-  margin-bottom: 40px;
+  gap: 16px;
+  margin-bottom: 28px;
 }
 
-/* Search Wrapper */
 .search-input-wrapper {
   position: relative;
   flex: 1 1 auto;
@@ -71,384 +146,398 @@
 
 .search-icon-inside {
   position: absolute;
-  left: 16px;
+  left: 14px;
   color: #a0aec0;
-  font-size: 16px;
+  font-size: 15px;
   pointer-events: none;
 }
 
 .search-dokter-input {
   width: 100%;
-  height: 48px;
-  padding: 0 44px 0 44px;
+  height: 44px;
+  padding: 0 40px 0 42px;
   background-color: #f8fafc;
-  border: 1px solid #edf2f7;
-  border-radius: 10px;
-  font-size: 15px;
+  border: 1px solid #e8eef5;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 400;
   color: #1a2530;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
+  outline: none;
+}
+
+.search-dokter-input::placeholder {
+  color: #aab4c2;
 }
 
 .search-dokter-input:focus {
-  outline: none;
   background-color: #ffffff;
   border-color: var(--color-brand-primary);
-  box-shadow: 0 0 0 3px rgba(0, 98, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(0, 98, 255, 0.08);
 }
 
 .clear-search-btn {
   position: absolute;
-  right: 16px;
+  right: 14px;
   background: none;
   border: none;
+  border-radius: 50%;
   color: #a0aec0;
   cursor: pointer;
   padding: 0;
-  font-size: 14px;
-  transition: color 0.3s ease;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
 }
 
 .clear-search-btn:hover {
   color: #4a5568;
+  background: none;
 }
 
-/* Price Filter Wrapper */
+.filter-divider {
+  width: 1px;
+  height: 28px;
+  background-color: #e4eaf5;
+  flex-shrink: 0;
+}
+
 .price-filter-wrapper {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   flex-shrink: 0;
+  color: #5a6578;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .price-filter-wrapper label {
-  font-size: 14px;
-  font-weight: 700;
-  color: #4a5568;
   display: flex;
   align-items: center;
   gap: 6px;
+  font-size: 13px;
+  font-weight: 400;
+  color: #8a97aa;
   margin: 0;
+  white-space: nowrap;
 }
 
 .price-filter-select {
-  height: 48px;
-  padding: 0 36px 0 16px;
+  height: 40px;
+  padding: 0 32px 0 12px;
   background-color: #f8fafc;
-  border: 1px solid #edf2f7;
-  border-radius: 10px;
-  font-size: 14px;
+  border: 1px solid #e8eef5;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 400;
   color: #1a2530;
-  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
+  outline: none;
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23718096' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 16px;
+  background-position: right 10px center;
+  background-size: 14px;
 }
 
 .price-filter-select:focus {
-  outline: none;
-  background-color: #ffffff;
   border-color: var(--color-brand-primary);
-  box-shadow: 0 0 0 3px rgba(0, 98, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(0, 98, 255, 0.08);
+  background-color: #ffffff;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────
-   2. Main Layout (Sidebar + Results)
-   ───────────────────────────────────────────────────────────────────────── */
+/* ── Page body layout ──────────────────────────────────────────────────── */
 .page-dokter {
   display: flex;
-  gap: 40px;
+  gap: 24px;
   align-items: flex-start;
 }
 
-/* Desktop Sidebar Filter */
+/* ── Sidebar ───────────────────────────────────────────────────────────── */
 .filtering-sidebar {
-  width: 280px;
-  background-color: #ffffff;
-  border: 1px solid #edf2f7;
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 8px 24px rgba(13, 30, 45, 0.02);
+  width: 220px;
   flex-shrink: 0;
+  background-color: #ffffff;
+  border: 1px solid #e4eaf5;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 2px 12px rgba(13, 30, 45, 0.03);
+  position: sticky;
+  top: 88px;
 }
 
 .sidebar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 16px;
-  border-bottom: 1px solid #edf2f7;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #edf2f8;
 }
 
 .sidebar-header h5 {
-  font-size: 16px;
-  font-weight: 800;
+  font-size: 13px;
+  font-weight: 500;
   color: #0d1e2d;
   margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
 }
 
 .reset-filter-btn {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-brand-primary);
   background: none;
   border: none;
-  color: #ff4d4f;
-  font-size: 13px;
-  font-weight: 700;
+  border-radius: var(--radius-pill);
+  padding: 3px 8px;
   cursor: pointer;
-  padding: 0;
+  transition: background 0.2s;
 }
 
 .reset-filter-btn:hover {
-  text-decoration: underline;
+  background: rgba(0, 98, 255, 0.06);
 }
 
-/* Specialty List Styling Overrides */
 .filtering-sidebar .jenis-spesialis {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 4px;
 }
 
 .filtering-sidebar .jenis-spesialis p {
-  display: none; /* Hide old label */
+  display: none;
 }
 
 .filtering-sidebar .jenis-spesialis label {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 14px;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 400;
   color: #4a5568;
   cursor: pointer;
-  font-weight: 500;
-  transition: color 0.2s ease;
+  padding: 6px 8px;
+  border-radius: 8px;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
 .filtering-sidebar .jenis-spesialis label:hover {
+  background: #f2f5ff;
   color: var(--color-brand-primary);
 }
 
 .filtering-sidebar .jenis-spesialis input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
+  width: 15px;
+  height: 15px;
   border-radius: 4px;
-  border: 1px solid #cbd5e0;
-  cursor: pointer;
   accent-color: var(--color-brand-primary);
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
-/* Results Area */
+/* ── Results area ──────────────────────────────────────────────────────── */
 .dokter-results-container {
-  flex-grow: 1;
+  flex: 1;
+  min-width: 0;
+}
+
+.results-meta {
+  font-size: 13px;
+  font-weight: 400;
+  color: #8a97aa;
+  margin-bottom: 16px;
 }
 
 .dokter-grid-row {
-  margin: 0 -12px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 0;
 }
 
-.card-col-result {
-  padding: 12px;
-}
-
-/* Mobile Filter DRAWER & TOGGLE */
-.res-filter-toggle {
-  display: none;
-  width: 100%;
-  height: 48px;
-  background-color: var(--color-brand-primary);
-  color: #ffffff;
-  border: none;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 700;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  cursor: pointer;
-  margin-bottom: 24px;
-  box-shadow: 0 4px 12px rgba(0, 98, 255, 0.15);
-}
-
-.filtering-drawer-mobile {
-  display: none;
-}
-
-/* ─────────────────────────────────────────────────────────────────────────
-   3. Doctor Cards (Overhauled Layout)
-   ───────────────────────────────────────────────────────────────────────── */
+/* ── Doctor card ───────────────────────────────────────────────────────── */
 .doctor-recommend-card {
   background-color: #ffffff;
-  border: 1px solid #edf2f7;
-  border-radius: 20px;
-  padding: 16px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid #e4eaf5 !important;
+  border-radius: 16px !important;
+  padding: 12px;
+  overflow: hidden;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
   height: 100%;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 12px rgba(13, 30, 45, 0.02);
 }
 
 .doctor-recommend-card:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 12px 28px rgba(0, 98, 255, 0.10);
-  border-color: rgba(0, 98, 255, 0.20);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 98, 255, 0.09);
+  border-color: rgba(0, 98, 255, 0.18) !important;
 }
 
 .doctor-card-img-wrapper {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1;
-  border-radius: 14px;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
-  margin-bottom: 16px;
-  background-color: #f1f5f9;
+  border-radius: 10px;
+  background-color: #f0f2f5;
+  margin-bottom: 12px;
 }
 
 .doctor-card-img-wrapper .dokter-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  object-position: top;
+  transition: transform 0.4s ease;
 }
 
 .doctor-recommend-card:hover .dokter-image {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 .doctor-card-rating {
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
   padding: 4px 8px;
   border-radius: 20px;
   display: flex;
   align-items: center;
   gap: 4px;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 500;
   color: #0d1e2d;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
-.doctor-card-rating .star-icon {
-  color: #ffb800;
+.star-icon {
+  color: #f59e0b;
+  font-size: 11px;
 }
 
 .doctor-card-content {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  padding: 0;
+  gap: 3px;
 }
 
 .doctor-card-content .card-title {
-  font-size: 17px;
-  font-weight: 700;
+  font-size: 15px;
+  font-weight: 500 !important;
   color: #0d1e2d;
-  margin: 0 0 6px 0;
+  margin: 0;
   line-height: 1.3;
 }
 
 .doctor-card-content .card-text {
   font-size: 13px;
-  color: #6c788f;
-  margin: 0 0 12px 0;
+  font-weight: 400;
+  color: #8a97aa;
+  margin: 0;
 }
 
 .doctor-card-content .card-price {
   font-size: 12px;
-  color: #78828a;
-  margin-bottom: 16px;
+  font-weight: 400;
+  color: #a0aec0;
+  margin-top: 8px;
+  line-height: 1.2;
 }
 
 .doctor-card-content .price-tag {
   display: block;
-  font-size: 16px;
-  font-weight: 800;
-  color: #ff7a00;
-  margin-top: 3px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-brand-primary);
+  margin-top: 2px;
 }
 
 .btn-consult-now {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  text-align: center;
   background-color: var(--color-brand-primary) !important;
   color: #ffffff !important;
-  font-size: 14px;
-  font-weight: 700;
-  padding: 12px;
-  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 9px 16px;
+  border-radius: var(--radius-pill);
   text-decoration: none;
-  transition: all 0.2s ease;
   border: none;
-  margin-top: auto;
+  margin-top: 10px;
+  transition: all 0.2s ease;
+  cursor: pointer;
 }
 
 .btn-consult-now:hover {
   background-color: var(--color-brand-hover) !important;
-  box-shadow: 0 4px 12px rgba(0, 98, 255, 0.2);
+  box-shadow: 0 4px 14px rgba(0, 98, 255, 0.25);
 }
 
-/* ─────────────────────────────────────────────────────────────────────────
-   4. Empty State & Pagination
-   ───────────────────────────────────────────────────────────────────────── */
+/* ── Empty state ───────────────────────────────────────────────────────── */
 .empty-state-results {
   background-color: #ffffff;
-  border: 1px solid #edf2f7;
+  border: 1px solid #e4eaf5;
   border-radius: 16px;
   padding: 60px 40px;
   text-align: center;
-  box-shadow: 0 8px 24px rgba(13, 30, 45, 0.02);
-  margin-bottom: 40px;
+  box-shadow: 0 2px 12px rgba(13, 30, 45, 0.03);
 }
 
 .empty-icon {
-  width: 72px;
-  height: 72px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   background-color: #f8fafc;
   color: #a0aec0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
-  margin: 0 auto 20px auto;
+  font-size: 28px;
+  margin: 0 auto 18px;
 }
 
 .empty-state-results h4 {
-  font-size: 20px;
-  font-weight: 800;
+  font-size: 18px;
+  font-weight: 500;
   color: #0d1e2d;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .empty-state-results p {
-  font-size: 15px;
-  color: #6c788f;
-  max-width: 440px;
-  margin: 0 auto;
+  font-size: 14px;
+  font-weight: 400;
+  color: #8a97aa;
+  max-width: 400px;
+  margin: 0 auto 20px;
   line-height: 1.6;
 }
 
-/* Pagination Wrapper */
+/* ── Pagination ────────────────────────────────────────────────────────── */
 .pagination-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  margin-top: 40px;
+  gap: 6px;
+  margin-top: 36px;
 }
 
 .pagination-arrow-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  border: 1px solid #edf2f7;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #e4eaf5;
   background-color: #ffffff;
   color: #4a5568;
   display: flex;
@@ -462,7 +551,7 @@
 .pagination-arrow-btn:hover:not(:disabled) {
   border-color: var(--color-brand-primary);
   color: var(--color-brand-primary);
-  background-color: var(--color-brand-light);
+  background-color: #f0f5ff;
 }
 
 .pagination-arrow-btn:disabled {
@@ -476,25 +565,25 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  gap: 6px;
+  gap: 4px;
 }
 
 .page-num-item,
 .page-num-active {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 400;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .page-num-item {
-  border: 1px solid #edf2f7;
+  border: 1px solid #e4eaf5;
   background-color: #ffffff;
   color: #4a5568;
 }
@@ -502,29 +591,58 @@
 .page-num-item:hover {
   border-color: var(--color-brand-primary);
   color: var(--color-brand-primary);
-  background-color: var(--color-brand-light);
+  background-color: #f0f5ff;
 }
 
 .page-num-active {
   background-color: var(--color-brand-primary);
   color: #ffffff;
-  border: 1px solid var(--color-brand-primary);
+  border: none;
+  font-weight: 500;
 }
 
-/* ── Responsive breakpoints ────────────────────────────────────────────── */
-@media screen and (max-width: 992px) {
+/* ── Mobile filter toggle ──────────────────────────────────────────────── */
+.res-filter-toggle {
+  display: none;
+}
+
+.filtering-drawer-mobile {
+  display: none;
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────── */
+@media screen and (max-width: 1024px) {
+  .hal-dokter {
+    padding: 24px 24px 60px;
+  }
+
+  .dokter-grid-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .page-hero-strip {
+    padding: 40px 0 36px;
+  }
+
+  .page-hero-inner {
+    padding: 0 20px;
+  }
+
+  .hal-dokter {
+    padding: 20px 16px 60px;
+  }
+
   .filter-header-card {
     flex-direction: column;
-    align-items: stretch;
-    gap: 16px;
+    gap: 12px;
+    padding: 14px 16px;
   }
-  
-  .price-filter-wrapper {
-    justify-content: space-between;
-  }
-  
-  .price-filter-select {
-    width: 220px;
+
+  .filter-divider {
+    width: 100%;
+    height: 1px;
   }
 
   .filtering-sidebar {
@@ -532,99 +650,78 @@
   }
 
   .res-filter-toggle {
-    display: inline-flex;
+    display: flex;
+    width: 100%;
+    height: 44px;
+    background-color: #ffffff;
+    color: var(--color-brand-primary);
+    border: 1px solid rgba(0, 98, 255, 0.25);
+    border-radius: var(--radius-pill);
+    font-size: 14px;
+    font-weight: 500;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    margin-bottom: 16px;
+    transition: all 0.2s ease;
   }
 
-  .page-dokter {
-    flex-direction: column;
-    gap: 0;
+  .res-filter-toggle:hover {
+    background: #f0f5ff;
   }
 
   .filtering-drawer-mobile {
     display: block;
-    width: 100%;
     background-color: #ffffff;
-    border: 1px solid #edf2f7;
-    border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 24px;
-    box-shadow: 0 8px 24px rgba(13, 30, 45, 0.03);
+    border: 1px solid #e4eaf5;
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 16px rgba(13, 30, 45, 0.06);
   }
 
   .drawer-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #edf2f7;
-    margin-bottom: 16px;
-    font-weight: 700;
+    margin-bottom: 12px;
+    font-size: 14px;
+    font-weight: 500;
     color: #0d1e2d;
   }
 
   .drawer-header button {
     background: none;
     border: none;
-    color: #a0aec0;
+    padding: 4px;
+    border-radius: 50%;
+    color: #8a97aa;
     cursor: pointer;
-    font-size: 16px;
-  }
-
-  /* Custom grid formatting for mobile check list */
-  .filtering-drawer-mobile .jenis-spesialis {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .filtering-drawer-mobile .jenis-spesialis p {
-    display: none;
-  }
-
-  .filtering-drawer-mobile .jenis-spesialis label {
-    flex: 0 0 calc(50% - 6px);
-    font-size: 13px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 0;
+    font-size: 14px;
   }
 }
 
-@media screen and (max-width: 576px) {
-  .cari-dokter-page {
-    padding: 0 16px 60px 16px;
+@media screen and (max-width: 560px) {
+  .dokter-grid-row {
+    grid-template-columns: 1fr;
   }
-  
-  .bread-dokter {
-    margin-top: 24px;
+
+  .page-hero-title {
+    font-size: 22px;
+  }
+
+  .page-hero-sub {
+    font-size: 13px;
     margin-bottom: 20px;
   }
 
-  .bread-dokter h1 {
-    font-size: 26px;
-  }
-
-  .filter-header-card {
-    padding: 16px;
-  }
-
-  .price-filter-wrapper {
-    flex-direction: column;
-    align-items: stretch;
+  .page-hero-stats {
     gap: 8px;
   }
 
-  .price-filter-select {
-    width: 100%;
-  }
-
-  .card-col-result {
-    padding: 8px 0;
-  }
-
-  .filtering-drawer-mobile .jenis-spesialis label {
-    flex: 0 0 100%;
+  .hero-stat-chip {
+    font-size: 12px;
+    padding: 5px 10px;
   }
 }

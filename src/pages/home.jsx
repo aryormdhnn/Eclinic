@@ -1,19 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   FaCalendarAlt, 
   FaRegCommentDots, 
   FaUserMd, 
   FaRegFileAlt,
-  FaArrowRight
+  FaArrowRight,
+  FaChevronDown,
+  FaChevronUp
 } from 'react-icons/fa';
 
 import '../css/home.css';
 import ImageCover from '../assets/dokter-cover.png';
 import CardDokter from '../components/cardDokter';
 import Artikel from '../components/artikel';
-import BannerDaftar from '../components/BannerDaftar';
 import Footer from '../components/Footer';
+
+const faqData = [
+  {
+    q: 'Bagaimana cara memulai konsultasi dengan dokter?',
+    a: 'Cukup pilih dokter yang sesuai kebutuhan Anda, klik "Chat Sekarang", dan Anda akan langsung terhubung dalam sesi konsultasi online tanpa perlu membuat janji temu.',
+  },
+  {
+    q: 'Apakah dokter yang tersedia sudah berlisensi resmi?',
+    a: 'Ya, seluruh dokter di eClinic telah terverifikasi dan memiliki Surat Tanda Registrasi (STR) yang masih aktif dari Konsil Kedokteran Indonesia.',
+  },
+  {
+    q: 'Berapa biaya konsultasi per sesi?',
+    a: 'Biaya konsultasi bervariasi tergantung spesialisasi dokter. Anda dapat melihat tarif secara transparan di halaman profil setiap dokter sebelum memulai sesi.',
+  },
+  {
+    q: 'Apakah riwayat konsultasi saya tersimpan?',
+    a: 'Ya, seluruh riwayat percakapan dan konsultasi Anda tersimpan dengan aman di akun pribadi Anda dan dapat diakses kapan saja.',
+  },
+  {
+    q: 'Berapa lama waktu respons dokter?',
+    a: 'Dokter kami umumnya merespons dalam hitungan menit. Semua dokter yang aktif ditandai dengan status "Online" sehingga Anda tahu mereka siap menjawab.',
+  },
+];
+
+const FaqItem = ({ q, a }) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={`faq-item${open ? ' faq-open' : ''}`}>
+      <button className="faq-question" onClick={() => setOpen(!open)}>
+        <span>{q}</span>
+        {open ? <FaChevronUp className="faq-chevron" /> : <FaChevronDown className="faq-chevron" />}
+      </button>
+      {open && <div className="faq-answer">{a}</div>}
+    </div>
+  );
+};
 
 const Home = () => {
   return (
@@ -98,19 +135,30 @@ const Home = () => {
         <CardDokter />
       </div>
 
-
-
-      {/* 5. Health Articles Section */}
+      {/* 4. Health Articles Section */}
       <div className="home-sub-section">
         <Artikel />
       </div>
 
-      {/* 6. Action Banner (CTA) */}
-      <div className="home-sub-section">
-        <BannerDaftar />
-      </div>
+      {/* 5. FAQ Section */}
+      <section className="faq-section">
+        <div className="faq-inner">
+          <div className="section-header text-center faq-header">
+            <span className="section-subtitle">Pertanyaan Umum</span>
+            <h2 className="section-title">Ada yang Ingin Anda Ketahui?</h2>
+            <p className="section-description">
+              Temukan jawaban atas pertanyaan yang paling sering diajukan seputar layanan konsultasi online eClinic.
+            </p>
+          </div>
+          <div className="faq-list">
+            {faqData.map((item, i) => (
+              <FaqItem key={i} q={item.q} a={item.a} />
+            ))}
+          </div>
+        </div>
+      </section>
 
-      {/* 7. Footer */}
+      {/* 6. Footer */}
       <Footer />
     </div>
   );

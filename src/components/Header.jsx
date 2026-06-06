@@ -1,43 +1,36 @@
 import { NavLink, Link } from "react-router-dom";
 import {
-  HiChevronDown,
   HiMenu,
   HiX,
   HiHome,
   HiSearch,
   HiDocumentText,
+  HiLogout,
+  HiChevronDown,
 } from "react-icons/hi";
 import React, { useState, useRef, useEffect } from "react";
 import "../css/header.css";
 import Logo from "../assets/logo.png";
-import "../globalstyle.css";
 
 export const Header = () => {
   const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
-  // Simple boolean toggles — no fragile click counter
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   const dropdownRef = useRef(null);
-  const sideMenuRef = useRef(null);
+  const mobileRef = useRef(null);
 
-  // Close menus when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target))
         setIsDropdownOpen(false);
-      }
-      if (sideMenuRef.current && !sideMenuRef.current.contains(event.target)) {
-        setIsSideMenuOpen(false);
-      }
+      if (mobileRef.current && !mobileRef.current.contains(e.target))
+        setIsMobileOpen(false);
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  const closeSideMenu = () => setIsSideMenuOpen(false);
 
   const handleLogout = () => {
     localStorage.removeItem("loggedInUser");
@@ -45,128 +38,142 @@ export const Header = () => {
   };
 
   const navItems = [
-    { to: "/", label: "Dashboard", icon: HiHome, end: true },
+    { to: "/", label: "Beranda", icon: HiHome, end: true },
     { to: "/cari-dokter", label: "Tanya Dokter", icon: HiSearch },
     { to: "/artikel", label: "Artikel", icon: HiDocumentText },
   ];
 
+  const userInitial = loggedInUser
+    ? loggedInUser.username.charAt(0).toUpperCase()
+    : "";
+  const userName = loggedInUser
+    ? loggedInUser.username.charAt(0).toUpperCase() +
+      loggedInUser.username.slice(1)
+    : "";
+
   return (
-    <div>
-      <nav className="navbar">
-        <div className="navbar-container">
-          <div className="menubar">
-            <Link to="/" className="brand-link">
-              <img src={Logo} alt="eClinic Logo" className="logo" />
-              <span>eClinic Telemedicine</span>
-            </Link>
-            <div className="menu men-nav">
-              {navItems.map(({ to, label, icon: Icon, end }) => (
-                <NavLink
-                  key={to}
-                  to={to}
-                  end={end}
-                  className={({ isActive }) => "nav-link" + (isActive ? " active" : "")}
-                >
-                  <Icon />
-                  <span>{label}</span>
-                </NavLink>
-              ))}
+    <header className="nav-root">
+      <nav className="nav-bar">
+        {/* Brand */}
+        <Link to="/" className="nav-brand">
+          <img src={Logo} alt="eClinic" className="nav-logo" />
+          <span className="nav-brand-name">eClinic</span>
+        </Link>
+
+        {/* Desktop Links */}
+        <ul className="nav-links">
+          {navItems.map(({ to, label, icon: Icon, end }) => (
+            <li key={to}>
+              <NavLink
+                to={to}
+                end={end}
+                className={({ isActive }) =>
+                  "nav-item" + (isActive ? " nav-item--active" : "")
+                }
+              >
+                {label}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+
+        {/* Desktop Right */}
+        <div className="nav-right">
+          {!loggedInUser ? (
+            <div className="nav-auth">
+              <Link to="/login" className="nav-btn-ghost">Masuk</Link>
+              <Link to="/register" className="nav-btn-primary">Daftar Gratis</Link>
             </div>
-          </div>
+          ) : (
+            <div className="nav-user" ref={dropdownRef}>
+              <button
+                className="nav-user-btn"
+                onClick={() => setIsDropdownOpen((p) => !p)}
+                aria-expanded={isDropdownOpen}
+                aria-label="User menu"
+              >
+                <span className="nav-avatar">{userInitial}</span>
+                <span className="nav-username">{userName}</span>
+                <HiChevronDown
+                  className={`nav-chevron${isDropdownOpen ? " nav-chevron--open" : ""}`}
+                />
+              </button>
 
-          <div className="icons">
-
-            <div className="button-header">
-              {!loggedInUser ? (
-                <>
-                  <Link to="/register" className="btn btn-outline-success">
-                    Register
-                  </Link>
-                  <Link to="/login" className="btn btn-success">
-                    Masuk
-                  </Link>
-                </>
-              ) : (
-                <div className="info-title" ref={dropdownRef}>
-                  <div className="name">
-                    {loggedInUser.username.charAt(0).toUpperCase()}
+              {isDropdownOpen && (
+                <div className="nav-dropdown">
+                  <div className="nav-dropdown-header">
+                    <span className="nav-avatar nav-avatar--lg">{userInitial}</span>
+                    <div>
+                      <p className="nav-dropdown-name">{userName}</p>
+                      <p className="nav-dropdown-role">Pengguna</p>
+                    </div>
                   </div>
-                  <h6 className="navbar-info-title">
-                    {loggedInUser.username.charAt(0).toUpperCase() +
-                      loggedInUser.username.slice(1)}
-                  </h6>
-                  <div className="dropdown">
-                    <button
-                      onClick={() => setIsDropdownOpen((prev) => !prev)}
-                      aria-label="User menu"
-                      aria-expanded={isDropdownOpen}
-                    >
-                      <HiChevronDown className="dropdown-button" />
-                    </button>
-                    {isDropdownOpen && (
-                      <div className="dropdown-content">
-                        <span className="dropdown-item">Profil</span>
-                        <span className="dropdown-item">Pengaturan</span>
-                        <button onClick={handleLogout} className="dropdown-item">
-                          Keluar
-                        </button>
-                      </div>
-                    )}
-                  </div>
+                  <div className="nav-dropdown-divider" />
+                  <button onClick={handleLogout} className="nav-dropdown-item nav-dropdown-item--danger">
+                    <HiLogout />
+                    Keluar
+                  </button>
                 </div>
               )}
             </div>
+          )}
 
-            {/* Mobile hamburger */}
-            <div className="dropdown-side" ref={sideMenuRef}>
-              <button
-                onClick={() => setIsSideMenuOpen((prev) => !prev)}
-                className="side"
-                aria-label="Toggle navigation menu"
-              >
-                {isSideMenuOpen ? (
-                  <HiX className="burger-icon" />
-                ) : (
-                  <HiMenu className="burger-icon" />
-                )}
-              </button>
+          {/* Hamburger */}
+          <button
+            className="nav-hamburger"
+            onClick={() => setIsMobileOpen((p) => !p)}
+            aria-label="Toggle menu"
+          >
+            {isMobileOpen ? <HiX /> : <HiMenu />}
+          </button>
+        </div>
+      </nav>
 
-              {isSideMenuOpen && (
-                <div className="menu men-side">
-                  {navItems.map(({ to, label, icon: Icon, end }) => (
-                    <NavLink
-                      key={to}
-                      to={to}
-                      end={end}
-                      className="nav-link"
-                      onClick={closeSideMenu}
-                    >
-                      <Icon />
-                      <span>{label}</span>
-                    </NavLink>
-                  ))}
-                  {loggedInUser && (
-                    <button onClick={handleLogout} className="keluar">
-                      Keluar
-                    </button>
-                  )}
-                  {!loggedInUser && (
-                    <>
-                      <NavLink to="/login" className="nav-link" onClick={closeSideMenu}>
-                        Masuk
-                      </NavLink>
-                      <NavLink to="/register" className="nav-link" onClick={closeSideMenu}>
-                        Register
-                      </NavLink>
-                    </>
-                  )}
-                </div>
+      {/* Mobile Drawer */}
+      {isMobileOpen && (
+        <div className="nav-mobile-overlay" onClick={() => setIsMobileOpen(false)}>
+          <div
+            className="nav-mobile-drawer"
+            ref={mobileRef}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="nav-mobile-brand">
+              <img src={Logo} alt="eClinic" className="nav-logo" />
+              <span className="nav-brand-name">eClinic</span>
+            </div>
+            <ul className="nav-mobile-links">
+              {navItems.map(({ to, label, icon: Icon, end }) => (
+                <li key={to}>
+                  <NavLink
+                    to={to}
+                    end={end}
+                    className={({ isActive }) =>
+                      "nav-mobile-item" + (isActive ? " nav-mobile-item--active" : "")
+                    }
+                    onClick={() => setIsMobileOpen(false)}
+                  >
+                    <Icon className="nav-mobile-icon" />
+                    {label}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+            <div className="nav-mobile-footer">
+              {!loggedInUser ? (
+                <>
+                  <Link to="/login" className="nav-btn-ghost nav-btn--full" onClick={() => setIsMobileOpen(false)}>Masuk</Link>
+                  <Link to="/register" className="nav-btn-primary nav-btn--full" onClick={() => setIsMobileOpen(false)}>Daftar Gratis</Link>
+                </>
+              ) : (
+                <button onClick={handleLogout} className="nav-btn-danger nav-btn--full">
+                  <HiLogout /> Keluar
+                </button>
               )}
             </div>
           </div>
         </div>
-      </nav>
-    </div>
+      )}
+    </header>
   );
 };
 

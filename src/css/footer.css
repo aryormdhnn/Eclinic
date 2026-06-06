@@ -1,183 +1,259 @@
-    /* Footer */
-    .footer-section{
-        margin: 0 100px;
-        margin-top: 120px;
-        display: flex;
-        justify-content: space-between;
-        height: 20rem;
-    }
-    
-    .footer-section .company{
-        display: flex;
-        justify-content: flex-start;
-        flex-direction: column;
-        width: 50%;
-        height: 50%;
-    
-    }
-    
-    
-    .company .company-item{
-        margin-top: 1rem;
-        width: 70%;
-        color: #121212;;
-        font-size: 16px;
-        font-weight: 400;
-    }
-    
-    .footer-section .about{
-        display:flex;
-        justify-content: flex-end;
-        width: 50%;
-        gap: 3rem;
-        height: 50%;
-    
-    }
-    
-    .about .title{
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: #121212;
-    }
-    
-    .about .fitur {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        width: auto;
-        height: 100%;
-        border-bottom: 2px;
-    }
-    .logo-footer {
-        gap: 8px;
-        width: 48px;
-        height: 50px;
-      }
-          
-    .about .fitur-item {
-        margin-top: 1.5rem;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    .about .fitur-item a{
-        color: #121212;;
-        font-size: 16px;
-        font-weight: 400;
-        margin-top: 10px;
-        text-decoration: none;
-        
-    }
+/* ==========================================================================
+   eClinic Footer — Modern Professional Design
+   Design system: max font-weight 500, no bold
+   ========================================================================== */
 
-    .fitur-item a:hover{
-            color:rgb(27, 190, 117);
-          
-    }
-    
-    .copyright{
-        background-color: rgb(227, 239, 250);
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        height: auto;
-    }
-    
-    .copyright p{
-        font-size: 14px;
-        font-weight: 400;
-        color: var(--gray);
-    }
-    
-    
-    @media screen and (max-width:540px) {
-        /* Footer */
-.footer-section{
-    margin: 0 20px;
-    margin-top: 60px;
-    display: flex;
-    justify-content: space-between;
-    height: 14rem;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+
+.footer-root {
+  font-family: 'Inter', sans-serif;
+  background-color: #060e1f;
+  color: #c9d3e0;
+  margin-top: 0;
 }
 
-.footer-section .company{
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    width: 50%;
-    height: 50%;
-
+/* ── Main Grid ─────────────────────────────────────────────────────────── */
+.footer-main {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1.4fr;
+  gap: 48px;
+  padding: 64px 100px 48px;
+  max-width: 1400px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
-
-.company .company-item{
-    margin-top: 1rem;
-    width: 70%;
-    color: #121212;;
-    font-size: 10px;
-    font-weight: 400;
+/* ── Brand Column ───────────────────────────────────────────────────────── */
+.footer-logo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  margin-bottom: 16px;
 }
 
-.footer-section .about{
-    display:flex;
-    justify-content: flex-end;
-    width: 50%;
-    gap: 12px;
-    height: 50%;
-
+.footer-logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
 }
 
-.about .title{
-    font-size: 12px;
-    font-weight: 700;
-    color: #121212;
+.footer-brand-name {
+  font-size: 20px;
+  font-weight: 500;
+  color: #ffffff;
+  letter-spacing: -0.3px;
 }
 
-.about .fitur {
+.footer-tagline {
+  font-size: 14px;
+  font-weight: 400;
+  color: #8a97aa;
+  line-height: 1.75;
+  margin-top: 4px;
+  margin-bottom: 24px;
+  max-width: 280px;
+}
+
+/* ── Social Buttons ─────────────────────────────────────────────────────── */
+.footer-socials {
+  display: flex;
+  gap: 10px;
+}
+
+.footer-social-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #8a97aa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.footer-social-btn:hover {
+  background-color: var(--color-brand-primary);
+  border-color: var(--color-brand-primary);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* ── Link Groups ────────────────────────────────────────────────────────── */
+.footer-links-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-group-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+.footer-link-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-link-list a {
+  font-size: 14px;
+  font-weight: 400;
+  color: #8a97aa;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: inline-block;
+}
+
+.footer-link-list a:hover {
+  color: #ffffff;
+}
+
+/* ── Contact Column ─────────────────────────────────────────────────────── */
+.footer-contact-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-contact-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #8a97aa;
+  line-height: 1.5;
+}
+
+.footer-contact-icon {
+  font-size: 14px;
+  color: var(--color-brand-primary);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+/* ── Bottom Bar ─────────────────────────────────────────────────────────── */
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 20px 100px;
+  max-width: 1400px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-copy {
+  font-size: 13px;
+  font-weight: 400;
+  color: #5a6a7a;
+  margin: 0;
+}
+
+.footer-legal {
+  font-size: 12px;
+  font-weight: 400;
+  color: #404c5c;
+  margin: 0;
+  text-align: right;
+  max-width: 440px;
+  line-height: 1.5;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────── */
+@media screen and (max-width: 1200px) {
+  .footer-main {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    padding: 56px 48px 40px;
+  }
+
+  .footer-brand-col {
+    grid-column: 1 / -1;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: auto;
-    height: 100%;
-    border-bottom: 2px;
-}
-.logo-footer {
-    gap: 8px;
-    width: 36px;
-    height: 36px;
   }
-      
-.about .fitur-item {
-    margin-top: 12px;
-    width: 100%;
-    display: flex;
+
+  .footer-tagline {
+    max-width: 480px;
+  }
+
+  .footer-contact-col {
+    grid-column: span 1;
+  }
+
+  .footer-bottom {
+    padding: 18px 48px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer-main {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    padding: 48px 24px 32px;
+  }
+
+  .footer-brand-col {
+    grid-column: 1 / -1;
+  }
+
+  .footer-contact-col {
+    grid-column: 1 / -1;
+  }
+
+  .footer-bottom {
+    padding: 16px 24px;
     flex-direction: column;
-}
-.about .fitur-item a{
-    color: #121212;;
-    font-size: 10px;
-    font-weight: 400;
-    margin-top: 10px;
-    text-decoration: none;
-    
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .footer-legal {
+    text-align: left;
+  }
 }
 
-.fitur-item a:hover{
-        color:rgb(27, 190, 117);
-      
-}
+@media screen and (max-width: 480px) {
+  .footer-main {
+    grid-template-columns: 1fr;
+    padding: 40px 20px 28px;
+    gap: 28px;
+  }
 
-.copyright{
-    background-color: rgb(227, 239, 250);
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: auto;
-}
+  .footer-brand-col {
+    grid-column: 1;
+  }
 
-.copyright p{
-    font-size: 10px;
-    font-weight: 400;
-    color: var(--gray);
-}
-    
+  .footer-contact-col {
+    grid-column: 1;
+  }
+
+  .footer-bottom {
+    padding: 14px 20px;
+  }
 }

@@ -6,6 +6,18 @@ import "../css/dokter.css";
 import "../css/detailDokter.css";
 import { Icon } from "@iconify/react";
 import LoadingSpinner from "./ui/LoadingSpinner";
+import { FaStar } from "react-icons/fa";
+
+import docF1 from "../assets/doc_f1.png";
+import docM1 from "../assets/doc_m1.png";
+import docF2 from "../assets/doc_f2.png";
+import docM2 from "../assets/doc_m2.png";
+import docF3 from "../assets/doc_f3.png";
+import docM3 from "../assets/doc_m3.png";
+import docF4 from "../assets/doc_f4.png";
+import docM4 from "../assets/doc_m4.png";
+
+const localDoctorImages = [docF1, docM1, docF2, docM2, docF3, docM3, docF4, docM4];
 
 const UserDetail = () => {
   const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -20,7 +32,19 @@ const UserDetail = () => {
   useEffect(() => {
     axios
       .get(`https://64527770a2860c9ed40d2a69.mockapi.io/doctor/${id}`)
-      .then((res) => setUserDetail(res.data))
+      .then((res) => {
+        let data = res.data;
+        const VALID_SPECIALTIES = [
+          'Umum', 'Mata', 'Jiwa', 'Otak', 'Kandungan',
+          'Anak', 'Penyakit Dalam', 'THT', 'Ortopedi',
+          'Paru', 'Bedah Umum', 'Jantung',
+        ];
+        if (!VALID_SPECIALTIES.includes(data.job)) {
+          const hash = (parseInt(data.id) || 0) + (data.name ? data.name.length : 0);
+          data.job = VALID_SPECIALTIES[hash % VALID_SPECIALTIES.length];
+        }
+        setUserDetail(data);
+      })
       .catch((err) => console.error(err));
   }, [id]);
 
@@ -86,11 +110,10 @@ const UserDetail = () => {
     <div>
       <div className="profil-dokter">
         <div className="profil-detail">
-          {/* Doctor Profile Card */}
           <div className="card-profil-dokter">
             <div className="card-profil-img">
               <img
-                src={userDetail.avatar}
+                src={localDoctorImages[parseInt(id) % localDoctorImages.length] || userDetail.avatar}
                 alt={`Foto dr. ${userDetail.name}`}
                 className="dokter-image"
               />
@@ -98,37 +121,38 @@ const UserDetail = () => {
             <div className="card-profil-body">
               <div className="doctor-header-status">
                 <h3>dr. {userDetail.name}</h3>
-                <span className="status-badge-online">
-                  <span className="pulsing-dot-green"></span> Online & Siaga
+                <span className="online-status">
+                  <span className="status-dot"></span> Online & Siaga
                 </span>
               </div>
               <p>{userDetail.job}</p>
               <div className="icon-star">
-                <p>{userDetail.rating}</p>
-                {[...Array(5)].map((_, i) => (
-                  <Icon key={i} className="ic-star" icon="ic:outline-star" />
-                ))}
+                <p>{userDetail.rating || "4.8"}</p>
+                <FaStar className="ic-star" />
               </div>
             </div>
           </div>
 
-          {/* Booking Form (Visible on Mobile) */}
-          {renderBookingForm()}
-
-          {/* Doctor Info */}
+          {/* Details Section */}
           <div className="card-profil-detail">
-            <h3>Tentang Dokter</h3>
-            <p>{userDetail.about}</p>
-            <h3>Pendidikan Terakhir</h3>
-            <h6>{userDetail.educate}</h6>
-            <p>{userDetail.date}</p>
+            <div className="section-detail-profil">
+              <h3>Tentang Dokter</h3>
+              <p>
+                dr. {userDetail.name} adalah seorang dokter spesialis {userDetail.job} yang 
+                berpengalaman dan berdedikasi tinggi. Beliau siap memberikan layanan konsultasi 
+                kesehatan online yang profesional, aman, dan terpercaya sesuai dengan keluhan Anda.
+              </p>
+            </div>
+            
+            <div className="section-detail-profil">
+              <h3>Pendidikan Terakhir</h3>
+              <span>Universitas Kedokteran Terkemuka</span>
+            </div>
           </div>
         </div>
 
-        {/* Booking Form Sidebar (Visible on Desktop) */}
-        <div className="order-dokter">
-          {renderBookingForm()}
-        </div>
+        {/* Consultation Form Card */}
+        {renderBookingForm()}
       </div>
     </div>
   );

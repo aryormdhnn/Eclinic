@@ -1,32 +1,53 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
+import { supabase } from '../lib/supabaseClient';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [username, setUsername] = useState('');
+  const [session, setSession] = useState(null);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const login = (username) => {
-    localStorage.setItem('loggedInUser', JSON.stringify({ username }));
-    setIsAuthenticated(true);
-    setUsername({ username });
+  useEffect(() => {
+    // Initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      updateLegacyStorage(session?.user);
+      setLoading(false);
+    });
+
+    // Listen to changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      updateLegacyStorage(session?.user);
+      setLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const updateLegacyStorage = (userObj) => {
+    if (userObj) {
+      const username = userObj.user_metadata?.username || userObj.email.split('@')[0];
+      localStorage.setItem('loggedInUser', JSON.stringify({ 
+        username, 
+        email: userObj.email 
+      }));
+    } else {
+      localStorage.removeItem('loggedInUser');
+    }
   };
 
-  const logout = () => {
-    setIsAuthenticated(false);
-  };
-
-  const register = (username) => {
-    // Lakukan penanganan registrasi, seperti menyimpan data pengguna ke database
-    // atau melakukan tindakan lain yang diperlukan
-    // Misalnya, Anda dapat menggunakan API untuk mengirim permintaan POST ke endpoint registrasi
-    // Setelah berhasil mendaftar, Anda dapat melanjutkan dengan login otomatis
-    login(username);
+  // Legacy compat
+  const logout = async () => {
+    await supabase.auth.signOut();
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout, register }}>
-      {children}
+    <AuthContext.Provider value={{ session, user, loading, isAuthenticated: !!user, logout }}>
+      {!loading && children}
     </AuthContext.Provider>
   );
 };

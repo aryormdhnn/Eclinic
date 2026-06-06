@@ -7,12 +7,24 @@ import {
   FaChevronLeft, 
   FaChevronRight, 
   FaFilter,
-  FaTimes
+  FaTimes,
+  FaUserMd
 } from 'react-icons/fa';
 import SpecialtyFilter from "./features/doctor/SpecialtyFilter";
 import LoadingSpinner from "./ui/LoadingSpinner";
 import "../css/dokter.css";
 import "../globalstyle.css";
+
+import docF1 from "../assets/doc_f1.png";
+import docM1 from "../assets/doc_m1.png";
+import docF2 from "../assets/doc_f2.png";
+import docM2 from "../assets/doc_m2.png";
+import docF3 from "../assets/doc_f3.png";
+import docM3 from "../assets/doc_m3.png";
+import docF4 from "../assets/doc_f4.png";
+import docM4 from "../assets/doc_m4.png";
+
+const localDoctorImages = [docF1, docM1, docF2, docM2, docF3, docM3, docF4, docM4];
 
 const USERS_PER_PAGE = 8;
 
@@ -30,7 +42,23 @@ const DoctorList = () => {
     fetch("https://64527770a2860c9ed40d2a69.mockapi.io/doctor")
       .then((res) => res.json())
       .then((data) => {
-        setUsers(data);
+        const VALID_SPECIALTIES = [
+          'Umum', 'Mata', 'Jiwa', 'Otak', 'Kandungan',
+          'Anak', 'Penyakit Dalam', 'THT', 'Ortopedi',
+          'Paru', 'Bedah Umum', 'Jantung',
+        ];
+        
+        const cleanedData = data.map(user => {
+          let job = user.job;
+          if (!VALID_SPECIALTIES.includes(job)) {
+            // Map invalid jobs deterministically based on user.id so it's consistent
+            const hash = (parseInt(user.id) || 0) + user.name.length;
+            job = VALID_SPECIALTIES[hash % VALID_SPECIALTIES.length];
+          }
+          return { ...user, job };
+        });
+        
+        setUsers(cleanedData);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -118,9 +146,9 @@ const DoctorList = () => {
             aria-label="Filter harga"
             className="price-filter-select"
           >
-            <option value="All">Semua Tarif Konsultasi</option>
+            <option value="All">Semua Tarif</option>
             <option value="Below 50">Di bawah Rp 50.000</option>
-            <option value="50-70">Rp 50.000 - Rp 70.000</option>
+            <option value="50-70">Rp 50.000 – Rp 70.000</option>
             <option value="Above 70">Di atas Rp 70.000</option>
           </select>
         </div>
@@ -176,38 +204,38 @@ const DoctorList = () => {
 
         {/* 3. Doctors List Area */}
         <main className="dokter-results-container">
+          <p className="results-meta">{filteredUsers.length} dokter ditemukan</p>
           {displayedUsers.length === 0 ? (
             <div className="empty-state-results">
               <div className="empty-icon"><FaUserMd /></div>
               <h4>Dokter Tidak Ditemukan</h4>
-              <p>Maaf, kami tidak menemukan dokter spesialis yang sesuai dengan kriteria filter Anda. Coba bersihkan pencarian atau ubah filter spesialisasi.</p>
-              <button onClick={resetFilters} className="btn btn-success mt-3">Reset Semua Filter</button>
+              <p>Kami tidak menemukan dokter yang sesuai. Coba bersihkan pencarian atau ubah filter.</p>
+              <button onClick={resetFilters} className="btn-consult-now" style={{maxWidth:'200px',margin:'0 auto'}}>Reset Filter</button>
             </div>
           ) : (
-            <div className="row dokter-grid-row">
-              {displayedUsers.map((user) => (
-                <div key={user.id} className="col-xl-4 col-lg-6 col-md-6 col-sm-12 card-col-result">
-                  <div className="card border-0 doctor-recommend-card">
-                    <div className="doctor-card-img-wrapper">
-                      <img
-                        src={user.avatar}
-                        alt={`dr. ${user.name}`}
-                        className="dokter-image"
-                      />
-                      <div className="doctor-card-rating">
-                        <FaStar className="star-icon" /> <span>{user.rating || "4.8"}</span>
-                      </div>
+            <div className="dokter-grid-row">
+              {displayedUsers.map((user, index) => (
+                <div key={user.id} className="doctor-recommend-card">
+                  <div className="doctor-card-img-wrapper">
+                    <img
+                      src={localDoctorImages[index % localDoctorImages.length]}
+                      alt={`dr. ${user.name}`}
+                      className="dokter-image"
+                    />
+                    <div className="doctor-card-rating">
+                      <FaStar className="star-icon" /> <span>{user.rating || "4.8"}</span>
                     </div>
-                    <div className="doctor-card-content">
-                      <h5 className="card-title">dr. {user.name.substring(0, 16)}</h5>
-                      <p className="card-text">{user.job}</p>
-                      <div className="card-price">
-                        Mulai Dari <span className="price-tag">Rp {(user.price * 1000).toLocaleString('id-ID')}</span>
-                      </div>
-                      <Link className="btn btn-consult-now" to={`/profil-dokter/${user.id}`}>
-                        Chat Sekarang
-                      </Link>
+                  </div>
+                  <div className="doctor-card-content">
+                    <h5 className="card-title">dr. {user.name.substring(0, 20)}</h5>
+                    <p className="card-text">{user.job}</p>
+                    <div className="card-price">
+                      Mulai Dari
+                      <span className="price-tag">Rp {(user.price * 1000).toLocaleString('id-ID')}</span>
                     </div>
+                    <Link className="btn-consult-now" to={`/profil-dokter/${user.id}`}>
+                      Chat Sekarang
+                    </Link>
                   </div>
                 </div>
               ))}

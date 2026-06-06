@@ -11,7 +11,7 @@
 .suksesorder h5 {
     font-size: 18px;
     font-weight: 500;
-    color: #00A376;
+    color: var(--color-brand-primary);
 }
 
 .image-sukses {
@@ -21,11 +21,11 @@
 
 .suksesorder .bt-sukses{
     font-size: 16px;
-    background-color: #00A376;
+    background-color: var(--color-brand-primary);
     padding: 8px 24px;
     border: none;
+    border-radius: var(--radius-pill);
     margin-top: 4px;
-
 }
 
 @media screen and (max-width:540px) {
@@ -48,7 +48,7 @@
         margin: 0 10px;
         font-size: 14px;
         font-weight: 500;
-        color: #00A376;
+        color: var(--color-brand-primary);
     }
     
     .image-sukses {
@@ -59,10 +59,10 @@
     .suksesorder .bt-sukses{
         font-size: 14px;
         margin: 0 10px;
-        background-color: #00A376;
+        background-color: var(--color-brand-primary);
         padding: 8px 16px;
         border: none;
+        border-radius: var(--radius-pill);
         margin-top: 4px;
-
     }
 }

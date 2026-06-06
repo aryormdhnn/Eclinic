@@ -1,131 +1,201 @@
-.login-form {
-    max-width: 480px;
-    margin: 40px auto;
-    padding: 0 24px;
-  }
-  
-  .login-form h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .login-form label {
-    display: block;
-    margin-bottom: 10px;
-  }
-  
-  .login-form input[type="text"],
-  .login-form input[type="password"] {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 12px;
-  }
-  
-  .login-form button {
-    width: 100%;
-    padding: 8px;
-    background-color: #00A376;
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-  }
-  
-  .login-form button:hover {
-    background-color: #00A376;
-  }  
+/* ==========================================================================
+   eClinic — Auth Pages (login.css)
+   Centered Card Layout
+   ========================================================================== */
 
+/* ── Global Auth Container ─────────────────────────────────────────────── */
+.auth-page-container {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top right, #e8f4f8, #f4f7f9);
+  font-family: 'Inter', sans-serif;
+  padding: 40px 20px;
+  position: relative;
+}
+
+/* Background subtle blobs (optional for modern look) */
+.auth-page-container::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(0, 98, 255, 0.04) 0%, rgba(0, 98, 255, 0) 70%);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* ── Auth Card ─────────────────────────────────────────────────────────── */
+.auth-card {
+  width: 100%;
+  max-width: 460px;
+  background-color: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 12px 40px rgba(13, 30, 45, 0.08);
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+}
+
+.auth-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.auth-logo img {
+  height: 44px;
+}
+
+.auth-form-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.auth-form-header h2 {
+  font-size: 26px;
+  font-weight: 600;
+  color: #0d1e2d;
+  margin: 0 0 8px;
+  letter-spacing: -0.5px;
+}
+
+.auth-form-header p {
+  font-size: 15px;
+  color: #66707a;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Form Elements ─────────────────────────────────────────────────────── */
+.auth-form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-form-group label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a2530;
+  margin-bottom: 8px;
+}
+
+.auth-form-group input {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid #d1d9e6;
+  border-radius: 12px;
+  font-size: 15px;
+  color: #0d1e2d;
+  background-color: #f8fafc;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.auth-form-group input:focus {
+  border-color: var(--color-brand-primary);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(0, 98, 255, 0.1);
+}
+
+.auth-submit-btn {
+  width: 100%;
+  height: 48px;
+  background-color: var(--color-brand-primary);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 12px;
+}
+
+.auth-submit-btn:hover:not(:disabled) {
+  background-color: var(--color-brand-hover);
+  box-shadow: 0 4px 12px rgba(0, 98, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.auth-submit-btn:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* Error message styling */
+.auth-error {
+  background-color: #fef2f2;
+  border: 1px solid #fca5a5;
+  color: #dc2626;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 14px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Links */
+.auth-link-text {
+  text-align: center;
+  margin-top: 32px;
+  font-size: 14px;
+  color: #4a5568;
+}
+
+.auth-link-text a {
+  color: var(--color-brand-primary);
+  font-weight: 500;
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+.auth-link-text a:hover {
+  text-decoration: underline;
+}
+
+/* Back to Home link */
+.auth-back-home {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #4a5568;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  z-index: 10;
+  transition: all 0.2s;
+}
+
+.auth-back-home:hover {
+  color: var(--color-brand-primary);
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────── */
+@media screen and (max-width: 576px) {
+  .auth-page-container {
+    padding: 24px 16px;
+    align-items: flex-start;
+  }
   
-  .register-form {
-    max-width: 480px;
-    margin: 40px auto;
-    padding: 0 24px;
-  }
-  
-  .register-form h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .register-form label {
-    display: block;
-    margin-bottom: 10px;
-  }
-  
-  .register-form input[type="text"],
-  .register-form input[type="email"],
-  .register-form input[type="password"] {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 12px;
-  }
-  
-  .register-form button {
-    width: 100%;
-    padding: 8px;
-    background-color: #00A376;
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-  }
-  
-  .register-form button:hover {
-    background-color: #00A376;
-  }  
-
-  .text-link {
-    text-align: center;
-    margin-top: 16px;
-    color: #070717;
-    font-weight: 600;
-    font-size: 16px;
+  .auth-card {
+    padding: 32px 24px;
+    box-shadow: 0 4px 20px rgba(13, 30, 45, 0.05);
   }
 
-  .text-link a {
-    color: #00A376;
-    text-decoration: none;
+  .auth-back-home {
+    top: 20px;
+    left: 20px;
   }
-
-  /* Inline error message for login/register forms */
-  .form-error {
-    background-color: #fef2f2;
-    border: 1px solid #fca5a5;
-    color: #dc2626;
-    border-radius: 8px;
-    padding: 10px 14px;
-    font-size: 14px;
-    margin-bottom: 16px;
-  }
-
-  /* Tablet (768px) */
-  @media screen and (max-width: 768px) {
-    .login-form,
-    .register-form {
-      max-width: 400px;
-    }
-  }
-
-
-@media screen and (max-width: 540px) {
-    .login-form,
-    .register-form {
-        margin: 24px 16px;
-        max-width: 100%;
-        padding: 0;
-    }
-
-    .login-form h2,
-    .register-form h2 {
-        font-size: 22px;
-    }
-
-    .text-link {
-        margin-top: 16px;
-        font-size: 14px;
-    }
 }

@@ -1,321 +1,284 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-
-.page-detail-order{
-  margin: 50px 340px;
-  border: 1px solid rgb(196, 196, 196);
-  border-radius: 12px;
-  height: auto;
+/* ── Global Layout ───────────────────────────────────────────────────────── */
+body {
+  background-color: #f4f7fb;
 }
 
+.page-detail-order {
+  max-width: 640px;
+  margin: 60px auto;
+  background-color: #ffffff;
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+  font-family: 'Inter', sans-serif;
+  color: #1a2530;
+}
 
-.order-page {
-  margin: 0;
+/* ── 1. Doctor Profile Section ─────────────────────────────────────────── */
+.page-detail-order .order-page {
+  padding: 0;
+  margin-bottom: 32px;
+}
+
+.page-detail-order .card-page-dokter {
+  border: 1px solid #edf2f7;
+  background: linear-gradient(145deg, #ffffff, #f8faff);
+  border-radius: 20px;
+  padding: 24px;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 98, 255, 0.03);
+}
+
+.page-detail-order .card-profil-dokter {
   display: flex;
-  justify-content: space-between;
-  padding: 1rem;
+  align-items: center;
+  gap: 24px;
 }
 
-.card-profil-img .dokter-image {
+/* Image wrapper */
+.page-detail-order .card-profil-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%; /* Circle looks more premium for avatars */
+  padding: 4px;
+  background: linear-gradient(135deg, var(--color-brand-primary), #60a5fa);
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* Actual image */
+.page-detail-order .dokter-image {
   width: 100%;
   height: 100%;
-  background-size: cover;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top center;
+  border: 3px solid #ffffff;
+  background-color: #e2e8f0;
+}
+
+.page-detail-order .card-profil-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.page-detail-order .card-profil-body h3 {
+  font-size: 20px;
+  margin: 0 0 4px 0;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.3px;
+}
+
+.page-detail-order .card-profil-body p {
+  font-size: 15px;
+  color: #64748b;
+  margin: 0 0 12px 0;
+  font-weight: 500;
+}
+
+/* Star Icon sizing */
+.page-detail-order .icon-star {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 16px;
+  background-color: #fffbeb;
+  padding: 4px 10px;
+  border-radius: 20px;
+  width: fit-content;
+}
+.page-detail-order .icon-star p {
+  margin: 0 6px 0 0;
+  font-weight: 700;
+  color: #b45309;
+  font-size: 13px;
+}
+.page-detail-order .ic-star {
+  color: #f59e0b;
+  font-size: 14px;
+}
+
+/* Consultation info pills */
+.page-detail-order .consult {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.page-detail-order .jenis-consult {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #334155;
+  font-weight: 600;
+  background-color: #f1f5f9;
+  padding: 6px 12px;
   border-radius: 8px;
+}
+
+.page-detail-order .ic {
+  font-size: 16px;
+  color: var(--color-brand-primary);
+}
+
+/* ── 2. Form Kode Promo ────────────────────────────────────────────────── */
+.page-detail-order .order-detail {
+  margin-bottom: 32px;
+}
+
+.page-detail-order .form-order {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+}
+
+.page-detail-order .form-order label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* Wrapping the input to add an icon if needed */
+.page-detail-order .form-order input {
+  height: 52px;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  padding: 0 20px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.2s;
+  background-color: #ffffff;
+  color: #0f172a;
+}
+
+.page-detail-order .form-order input:focus {
+  border-color: var(--color-brand-primary);
+  box-shadow: 0 0 0 4px rgba(0, 98, 255, 0.1);
+  outline: none;
+}
+.page-detail-order .form-order input::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+/* ── 3. Rincian Pembayaran ─────────────────────────────────────────────── */
+.page-detail-order .total-order {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  background-color: #f8fafc;
+  border-radius: 16px;
+  margin-bottom: 32px;
+}
+
+.page-detail-order .total-order h5 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 12px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 12px;
+}
+
+.page-detail-order .total-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  color: #475569;
+  font-weight: 500;
+}
+
+.page-detail-order .total-item p {
   margin: 0;
 }
 
-.card-page-dokter {
-  border: 1px solid rgb(196, 196, 196);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1rem;
-  width: 50rem;
-  height: auto;
-  padding-left: 1rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  border-radius: 12px;
+.page-detail-order .total-item:nth-child(3) {
+  color: #10b981; /* Green color for discount */
 }
 
-.order-detail {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  /* padding: 1rem; */
+/* Total Akhir */
+.page-detail-order .total-item:last-child {
+  padding-top: 16px;
+  margin-top: 4px;
+  border-top: 1px dashed #cbd5e1;
+  font-weight: 700;
+  color: #0f172a;
+  font-size: 16px;
 }
 
-.order-detail form {
-  border-radius: 12px;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
+.page-detail-order .total-item:last-child span {
+  color: var(--color-brand-primary);
+  font-size: 22px;
+  letter-spacing: -0.5px;
 }
 
+/* ── 4. Tombol Bayar ───────────────────────────────────────────────────── */
+.page-detail-order .button-form-order {
+  width: 100%;
+  height: 56px;
+  background: linear-gradient(135deg, #0062ff 0%, #0044b3 100%);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(0, 98, 255, 0.25);
+}
 
-.form-order{
-    display: flex;
-    justify-content: space-between;
+.page-detail-order .button-form-order:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 98, 255, 0.35);
+  background: linear-gradient(135deg, #0056e0 0%, #003a99 100%);
+}
+
+.page-detail-order .button-form-order:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(0, 98, 255, 0.2);
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────── */
+@media screen and (max-width: 768px) {
+  .page-detail-order {
+    margin: 32px auto;
+    padding: 32px 24px;
+    max-width: 90%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .page-detail-order {
+    margin: 20px auto;
+    padding: 24px 20px;
+    max-width: 95%;
+    border-radius: 20px;
+  }
+  
+  .page-detail-order .card-profil-dokter {
     flex-direction: column;
     align-items: flex-start;
-}
-
-.form-order label{
-    font-size: 1rem;
-    font-weight: 700;
-    margin: 0;
-    display: flex;
-    justify-content: flex-start;
-    width: 20rem;
-    color: #000;
-    margin-bottom: 1rem;
-}
-
-.form-order input{
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 1rem;
-
-    color: #000;
-    width: 100%;
-    height: 2.5rem;
-    border-radius: 8px;
-    padding: 8px;
-    border: 1px solid rgb(196, 196, 196);
-    
-}
-
-.form-order select{
-    font-size: 14px;
-    font-weight: 400;
-    margin-bottom: 1rem;
-
-    color: #000;
-    width: 100%;
-    height: 2.5rem;
-    border-radius: 8px;
-    padding: 8px;
-    border: 1px solid rgb(196, 196, 196);
-    
-}
-
-
-.total-order {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .page-detail-order .card-profil-img {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .page-detail-order .consult {
     flex-direction: column;
-    margin: 0;
-    padding: 1rem;
-  }
-
-  .total-order h5{
-    font-size: 1rem;
-    font-weight: 700;
-    margin: 0;
-    display: flex;
-    justify-content: flex-start;
-    width: 20rem;
-    color: #000;
-    margin-bottom: 1rem;
-  }
-  
-  .total-order .total-item{
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  .total-item p{
-    font-size: 14px;
-    font-weight: 500;
-    margin: 0;
-    display: flex;
-    justify-content: flex-start;
-    color: #000;
-    margin-bottom: 1rem;
-  }
-
-  .button-form-order{
-    width: 100%;
-    height: 35px;
-    margin-top: 8px;
-    background-color:rgb(27, 190, 117);
-    border: rgb(27, 190, 117);
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 500;
-    color: white;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-}
-
-.pay-image{
-  width: 4px;
-  height: 4px;
-  position: absolute;
-  z-index: 99;
-}
-
-
-@media screen and (max-width:540px) {
-  .page-detail-order{
-    margin: 40px 30px;
-    border: 1px solid rgb(196, 196, 196);
-    border-radius: 12px;
-    height: auto;
-  }
-  
-  .page-detail-order .card-profil-img{
-    width: 6rem;
-  }
-  .order-page {
-    margin: 0;
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5rem;
-  }
-  
- .page-detail-order .card-profil-body{
-  width: 10rem;
-  gap: 4px;
- } 
-
- .page-detail-order .card-profil-body h3{
-    margin-bottom: 2px;
-    font-size: 14px;
- }
-
- .page-detail-order .card-profil-body .ic{
-    font-size: 18px;
- }
-
- .page-detail-order .card-profil-body .ic-chat{
-  font-size: 18px;
-}
-
- .page-detail-order .card-profil-body .consult{
-  margin-top: 8px;
-  width: 9rem;
-  gap: 4px;
-  flex-direction: column;
- }
-  .card-page-dokter {
-    gap: 0.2rem;
-    width: 25rem;
-    height: 9.4rem;
-    padding-left: 0.5rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    border-radius: 8px;
-  }
-    
-  .order-detail form {
-    border-radius: 12px;
-    padding: 0.5rem;
-    display: flex;
-    flex-direction: column;
-  }
-  
-
-  .form-order label{
-      font-size: 14px;
-      font-weight: 700;
-      width: 10rem;
-      color: #000;
-      margin-bottom: 0.5rem;
-  }
-  
-  .form-order input{
-      font-size: 12px;
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-    
-      color: #000;
-      width: 100%;
-      height: 2.5rem;
-      border-radius: 8px;
-      padding: 8px;
-      border: 1px solid rgb(196, 196, 196);
-      
-  }
-  
-  .form-order select{
-      font-size: 12px;
-      font-weight: 400;
-      margin-bottom: 0.5rem;
-  
-      color: #000;
-      width: 100%;
-      height: 2.5rem;
-      border-radius: 8px;
-      padding: 8px;
-      border: 1px solid rgb(196, 196, 196);
-      
-  }
-  
-  
-  .total-order {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex-direction: column;
-      margin: 0;
-      padding: 0.5rem;
-    }
-  
-    .total-order h5{
-      font-size: 14px;
-      font-weight: 700;
-      margin: 0;
-      display: flex;
-      justify-content: flex-start;
-      width: 10rem;
-      color: #000;
-      margin-bottom: 0.5rem;
-    }
-    
-    .total-order .total-item{
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-    }
-  
-    .total-item p{
-      font-size: 12px;
-      font-weight: 500;
-      margin: 0;
-      display: flex;
-      justify-content: flex-start;
-      color: #000;
-      margin-bottom: 0.5rem;
-    }
-  
-    .button-form-order{
-      width: 100%;
-      height: 32px;
-      padding: 4px;
-      margin-top: 8px;
-      background-color:rgb(27, 190, 117);
-      border: rgb(27, 190, 117);
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 500;
-      color: white;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-  }
-  
-  .pay-image{
-    width: 4px;
-    height: 4px;
-    position: absolute;
-    z-index: 99;
   }
 }

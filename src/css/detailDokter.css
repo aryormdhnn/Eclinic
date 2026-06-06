@@ -1,629 +1,334 @@
-.profil-dokter{
-    margin: 0 100px;
-    display: flex;
-    justify-content: space-between;
+/* ==========================================================================
+   eClinic — Profil Dokter (detailDokter.css)
+   Design system: max font-weight 500, no bold, pill radius
+   ========================================================================== */
+
+.profil-dokter {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px 40px 60px;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  font-family: 'Inter', sans-serif;
+  color: #1a2530;
 }
 
-.profil-detail{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 1rem;
-    width: 70%;
-    height: auto;
-    padding-left: 1rem;
-    padding-top: 1rem;
-    border-radius: 12px;
-    /* border: 1px solid rgb(196, 196, 196); */
-
+/* ── Left Column: Doctor Details ───────────────────────────────────────── */
+.profil-detail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
 }
 
-.card-profil-dokter{
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    width: 100%;
-    height: 10rem;
+/* Header profile info */
+.card-profil-dokter {
+  display: flex;
+  gap: 20px;
+  align-items: center;
 }
 
-.card-profil-dokter .card-profil-img{
-    width: 20%;
-    height: 100%;
+.card-profil-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #f0f2f5;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04);
 }
 
-.card-profil-dokter .card-profil-body{
-    padding-bottom: 14px;
-    width: 80%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 8px;
+.card-profil-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
 }
 
-.card-profil-body h3{
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-}
-.card-profil-body p{
-    font-size: 1rem;
-    font-weight: 400;
-    
+.card-profil-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0;
 }
 
-.card-profil-body .icon-star{
-    display: flex;
-    justify-content: space-between;
-    width: 7rem;
-    align-items: center;
-    height: 2rem;
-    margin: 0;
-}
-
-.icon-star p{
-    font-size: 14px;
-    margin-right: 4px;
-    align-self: center;
-    color: black;
-    font-weight: 600;
-}
-
-.icon-star .ic-star{
-    font-size: 1rem;
-    color: rgb(255, 215, 0);
-}
-
-.card-profil-detail{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
-    height: 100%;
-
-}
-
-.card-profil-detail h3{
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 14px;
-}
-
-.card-profil-detail p{
-    font-size: 1.15rem;
-    font-weight: 400;
-    margin-bottom: 24px;
-    color: #66707A;
-}
-
-
-.card-profil-detail span{
-    font-size: 1rem;
-    font-weight: 400;
-    margin-bottom: 14px;
-}
-
-.card-profil-detail h6{
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 4px;
-}
-
-.order-dokter{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-    width: 25%;
-}
-
-.card-order{
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: first baseline;
-    justify-content: space-between;
-    border: 1px solid #E3E9ED;
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    padding: 24px;
-}
-
-.profil-dokter h3{
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 14px;
-}
-
-.type-consult{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    gap: 0.5rem;
-    height: auto;
-    margin-bottom: 14px;
-    padding: 12px;
-    border-radius: 8px;
-}
-
-.jenis-consult{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: auto;
-    gap: 0.5rem;
-    height: 1.5rem;
-    margin-top: 8px;
-    border-radius: 8px;
-}
-
-.consult{
-    display: flex;
-    justify-content: space-between;
-    width: 23rem;
-}
-.jenis-consult .ic{
-    align-self: center;
-    font-size: 1.2rem;
-    color: rgb(14, 13, 13);
-    
-}
-
-.jenis-consult p{
-    align-self: center;
-    font-size: 1rem;
-    font-weight: 400;
-    color: black;
-
-}
-.type-consult .ic{
-    align-self: center;
-    font-size: 1.6rem;
-    color: rgb(14, 13, 13);
-    
-}
-
-.type-consult select{
-    width: 100%;
-    font-size: 14px;
-    font-weight: 400;
-    padding: 12px;
-    border-radius: 8px;
-    color: black;
-    border: 1px solid rgb(163, 163, 163);
-
-}
-
-
-.profil-dokter form{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    padding: 8px;
-}
-
-
-.profil-dokter label{
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 400;
-    margin-bottom: 8px;
-    display: flex;
-    gap:12px;
-    padding: 12px;
-    font-size:14px ;
-    font-weight: 600;
-    border: 1px solid rgb(238, 236, 236);
-    cursor: pointer;
-}
-.profil-dokter input{
-    border-radius: 8px;
-    background-color: var(--color-brand-primary);
-}
-
-.profil-dokter label:hover{
-    border: 1px solid var(--color-brand-primary);
-    background-color: #fff;
-}
-
-.profil-dokter form .button-form{
-    width: 100%;
-    height: 48px;
-    margin-top: 8px;
-    background-color: var(--color-brand-primary);
-    border: 1px solid var(--color-brand-primary);
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    color: white;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-}
-
-.profil-dokter form .disabled{
-    width: 100%;
-    height: 48px;
-    margin-top: 8px;
-    background-color: #b3cfff;
-    border: 1px solid #b3cfff;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-}
-.profil-dokter form button.clicked
-{
-    height: 48px;
-    margin-top: 8px;
-    color: var(--color-brand-primary);
-    border: 1px solid var(--color-brand-primary);
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    background-color: white;
-}
-
-.load{
-    font-size: 1.5rem;
-    
-    position: absolute;
-    left: 90vh;
-    top: 15rem;
-    margin: 0 100px;
-}
-
-
-.next-page{
-    width: 100%;
-    height: auto;
-}
-
-.profil-detail .card-order{
-    display: none;
-}
-
-
-@media screen and (max-width:540px) {
-   .profil-detail .card-order{
-    display: flex;
-}
-   
-    .profil-dokter{
-        margin: 0 20px;
-
-    }
-    
-    .profil-detail{
-        gap: 1rem;
-        width: 100%;
-        padding-left: 0;
-        padding-top: 0.5rem;
-    }
-    
-    .order-dokter{
-        display: none;
-    }
-    .card-profil-dokter{
-        gap: 12px;
-        height: 6rem;
-    }
-    
-    .card-profil-dokter .card-profil-img{
-        width: 40%;
-        height: 100%;
-    }
-    
-    .card-profil-dokter .card-profil-body{
-        padding-bottom: 14px;
-        width: 80%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        gap: 8px;
-    }
-    
-    .card-profil-body h3{
-        font-size: 1rem;
-        font-weight: 700;
-        margin-bottom: 8px;
-    }
-    .card-profil-body p{
-        font-size: 12px;
-        font-weight: 400;
-        
-    }
-    
-    .card-profil-body .icon-star{
-        display: flex;
-        justify-content: space-between;
-        width: 7rem;
-        align-items: center;
-        height: 2rem;
-        margin: 0;
-    }
-    
-    .icon-star p{
-        font-size: 12px;
-        margin-right: 4px;
-        align-self: center;
-        color: black;
-        font-weight: 600;
-    }
-    
-    .icon-star .ic-star{
-        font-size: 1rem;
-        color: rgb(255, 215, 0);
-    }
-    
-    .card-profil-detail{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        width: 100%;
-        height: 100%;
-    
-    }
-    
-    .card-profil-detail h3{
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-bottom: 14px;
-    }
-    
-    .card-profil-detail p{
-        font-size: 1.15rem;
-        font-weight: 400;
-        margin-bottom: 24px;
-        color: #66707A;
-    }
-    
-    
-    .card-profil-detail span{
-        font-size: 1rem;
-        font-weight: 400;
-        margin-bottom: 14px;
-    }
-    
-    .card-profil-detail h6{
-        font-size: 1rem;
-        font-weight: 700;
-        margin-bottom: 4px;
-    }
- 
-    .card-order{
-        padding: 8px;
-    }
-    
-    .profil-dokter h3{
-        font-size: 16px;
-        margin-bottom: 8px;
-    }
-    
-    .type-consult{
-        gap: 0.5rem;
-        height: auto;
-        margin-bottom: 8px;
-        padding: 8px;
-        border-radius: 8px;
-    }
-    
-    .jenis-consult{
-        gap: 0.5rem;
-        height: 1rem;
-        margin-top: 8px;
-        border-radius: 8px;
-    }
-    
-    .consult{
-        display: flex;
-        justify-content: space-between;
-        width: 12.5rem;
-    }
-    .jenis-consult .ic{
-        align-self: center;
-        font-size: 2rem;
-        color: rgb(14, 13, 13);
-        
-    }
-    
-    .jenis-consult p{
-        align-self: center;
-        font-size: 12px;
-        font-weight: 400;
-        color: black;
-    
-    }
-    .type-consult .ic{
-        align-self: center;
-        font-size: 1.5rem;
-        color: rgb(14, 13, 13);
-        
-    }
-    
-    .type-consult select{
-        width: 100%;
-        font-size: 12px;
-        font-weight: 400;
-        padding: 8px;
-        border-radius: 8px;
-        color: black;
-        border: 1px solid rgb(163, 163, 163);
-    
-    }
-    
-    
-    .profil-dokter form{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        width: 100%;
-        height: auto;
-        border-radius: 8px;
-        padding: 8px;
-    }
-    
-    
-    .profil-dokter label{
-        border-radius: 8px;
-        font-size: 12px;
-        font-weight: 400;
-        margin-bottom: 8px;
-        display: flex;
-        gap:8px;
-        padding: 8px;
-        font-weight: 600;
-        border: 1px solid rgb(238, 236, 236);
-        cursor: pointer;
-    }
-    .profil-dokter input{
-        padding: 10px;
-    
-        border-radius: 8px;
-        background-color:rgba(0, 163, 118, 1);
-    
-    }
-    
-    .profil-dokter label:hover{
-        border: 1px solid rgba(0, 163, 118, 1);
-        background-color: #fff;
-    }
-    
-    .profil-dokter form .button-form{
-        width: 100%;
-        height: 28px;
-        margin-top: 8px;
-        font-size: 12px;
-        border-radius: 8px;
-        padding: 10px;
-
-    }
-    
-    .profil-dokter form .disabled{
-        height: 28px;
-        margin-top: 8px;
-        font-size: 12px;
-        padding: 10px;
-        font-weight: 500;
-        border-radius: 8px;
-    }
-    .profil-dokter form button.clicked
-    {
-        height: 28px;
-    
-        border-radius: 8px;
-        margin-top: 8px;
-        font-size: 12px;
-        font-weight: 500;
-        background-color: white;
-     
-    }
-    
-    .card-profil-detail{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        width: 100%;
-        height: 100%;
-    
-    }
-    
-    .card-profil-detail p{
-        font-size: 14px;
-        font-weight: 400;
-        margin-bottom: 24px;
-        color: #66707A;
-    }
-    
-    
-    .card-profil-detail span{
-        font-size: 12px;
-        font-weight: 400;
-        margin-bottom: 14px;
-    }
-    
-    .card-profil-detail h6{
-        font-size: 12px;
-        font-weight: 700;
-        margin-bottom: 4px;
-    }
-    
-}
-
-/* ── Tanya Dokter Status & Info Styles ─────────────────────────────────── */
 .doctor-header-status {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
-.status-badge-online {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background-color: rgba(39, 174, 96, 0.1);
-    color: #27ae60;
-    font-size: 12px;
-    font-weight: 700;
-    padding: 4px 10px;
-    border-radius: 99px;
-    height: fit-content;
-    border: 1px solid rgba(39, 174, 96, 0.2);
+.doctor-header-status h3 {
+  font-size: 22px;
+  font-weight: 500;
+  color: #0d1e2d;
+  margin: 0;
+  letter-spacing: -0.2px;
 }
 
-.pulsing-dot-green {
-    width: 8px;
-    height: 8px;
-    background-color: #27ae60;
-    border-radius: 50%;
-    display: inline-block;
-    position: relative;
-    animation: pulse-green-glow 1.8s infinite ease-in-out;
+.online-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #e6f7ec;
+  color: #047857;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 500;
 }
 
-@keyframes pulse-green-glow {
-    0% {
-        box-shadow: 0 0 0 0 rgba(39, 174, 96, 0.7);
-    }
-    70% {
-        box-shadow: 0 0 0 6px rgba(39, 174, 96, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(39, 174, 96, 0);
-    }
+.status-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
 }
 
+.card-profil-body p {
+  font-size: 15px;
+  font-weight: 400;
+  color: #5a6578;
+  margin: 0;
+}
+
+.icon-star {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.icon-star p {
+  font-size: 15px;
+  font-weight: 500;
+  color: #0d1e2d;
+  margin: 0;
+}
+
+.icon-star .ic-star {
+  font-size: 14px;
+  color: #f59e0b;
+}
+
+/* About & Education text details */
+.card-profil-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #edf0f7;
+}
+
+.section-detail-profil {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-profil-detail h3 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #0d1e2d;
+  margin: 0;
+}
+
+.card-profil-detail p {
+  font-size: 14px;
+  font-weight: 400;
+  color: #66707a;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.card-profil-detail span {
+  font-size: 15px;
+  font-weight: 500;
+  color: #4a5568;
+}
+
+/* ── Right Column: Consultation Card ───────────────────────────────────── */
+.card-order {
+  width: 320px;
+  flex-shrink: 0;
+  background-color: #ffffff;
+  border: 1px solid #e4eaf5;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(13, 30, 45, 0.05);
+  position: sticky;
+  top: 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card-order h3 {
+  font-size: 18px;
+  font-weight: 500;
+  color: #0d1e2d;
+  margin: 0;
+}
+
+.type-consult {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #f8fafc;
+  border: 1px solid #edf0f7;
+  padding: 8px 16px;
+  border-radius: 12px;
+}
+
+.type-consult .ic {
+  font-size: 20px;
+  color: var(--color-brand-primary);
+  flex-shrink: 0;
+}
+
+.type-consult select {
+  width: 100%;
+  height: 36px;
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a2530;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23718096' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 16px;
+  padding-right: 24px;
+}
+
+/* Info box */
 .instant-consult-info {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    background-color: var(--color-brand-light);
-    border: 1px solid rgba(0, 98, 255, 0.15);
-    border-radius: 8px;
-    padding: 12px;
-    margin-bottom: 16px;
-    font-size: 13px;
-    color: #004ecc;
-    line-height: 1.4;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background-color: #eff6ff;
+  border: 1px solid #bfdbfe;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 24px;
 }
 
 .info-icon-blue {
-    color: var(--color-brand-primary);
-    font-size: 16px;
-    flex-shrink: 0;
-    margin-top: 1px;
+  font-size: 16px;
+  color: var(--color-brand-primary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.instant-consult-info span {
+  font-size: 13px;
+  font-weight: 400;
+  color: #1e3a8a;
+  line-height: 1.5;
+}
+
+/* Buttons */
+.card-order form {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-form {
+  width: 100%;
+  padding: 14px 16px;
+  background-color: var(--color-brand-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.button-form:hover {
+  background-color: var(--color-brand-hover);
+  box-shadow: 0 4px 14px rgba(0, 98, 255, 0.25);
+  color: #ffffff;
+}
+
+.clicked {
+  width: 100%;
+  padding: 14px 16px;
+  background-color: #f8fafc;
+  color: #10b981;
+  border: 1px solid #10b981;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: default;
+}
+
+.next-page {
+  margin-top: 12px;
+}
+
+.disabled {
+  display: block;
+  width: 100%;
+  padding: 14px 16px;
+  background-color: #f1f5f9;
+  color: #94a3b8;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  cursor: not-allowed;
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────── */
+@media screen and (max-width: 1024px) {
+  .profil-dokter {
+    padding: 24px 24px 60px;
+    flex-direction: column;
+  }
+
+  .card-order {
+    width: 100%;
+    position: static;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .profil-dokter {
+    padding: 20px 16px 60px;
+  }
+
+  .card-profil-img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .doctor-header-status h3 {
+    font-size: 22px;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .card-profil-dokter {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .card-profil-img {
+    width: 100%;
+    aspect-ratio: 1;
+    height: auto;
+    border-radius: 16px;
+  }
 }

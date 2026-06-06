@@ -1,14 +1,18 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import { Icon } from "@iconify/react";
+import { FaChevronLeft, FaInfoCircle } from 'react-icons/fa';
+import { supabase } from '../lib/supabaseClient';
 import "../globalstyle.css";
 import "../css/login.css";
 
+import logoEclinic from "../assets/logo.png";
+import loginIllustration from "../assets/login_illustration.png";
+
 const LoginPage = () => {
-  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -79,35 +83,26 @@ const LoginPage = () => {
     event.preventDefault();
     setError("");
 
-    if (username.trim() === "" || password.trim() === "") {
-      setError("Username dan password harus diisi.");
+    if (email.trim() === "" || password.trim() === "") {
+      setError("Email dan password harus diisi.");
       return;
     }
 
     setIsLoading(true);
     try {
-      // GET all users then filter — MockAPI doesn't support credential-based auth
-      const response = await fetch(
-        "https://6454643dc18adbbdfeb53cd7.mockapi.io/api/fe-11/user"
-      );
+      const { data, error: signInError } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+      });
 
-      if (!response.ok) {
-        throw new Error("Gagal menghubungi server.");
-      }
-
-      const users = await response.json();
-      const matchedUser = users.find(
-        (u) => u.username === username && u.password === password
-      );
-
-      if (matchedUser) {
-        login(matchedUser.username);
-        navigate("/");
+      if (signInError) {
+        setError("Login gagal: " + signInError.message);
       } else {
-        setError("Username atau password salah.");
+        // Successful login
+        navigate("/");
       }
     } catch (err) {
-      setError("Terjadi kesalahan. Coba lagi nanti.");
+      setError("Terjadi kesalahan sistem.");
       console.error(err);
     } finally {
       setIsLoading(false);
@@ -115,44 +110,64 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className="login-form">
-        <h2>Masuk</h2>
+    <div className="auth-page-container">
+      <Link to="/" className="auth-back-home">
+        <FaChevronLeft /> Kembali ke Beranda
+      </Link>
 
-        {error && (
-          <div className="form-error" role="alert">
-            {error}
-          </div>
-        )}
-
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            autoComplete="username"
-          />
+      {/* Center Card - Form */}
+      <div className="auth-card">
+        <div className="auth-logo">
+          <Link to="/">
+            <img src={logoEclinic} alt="eClinic Logo" />
+          </Link>
         </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete="current-password"
-          />
+        
+        <div className="auth-form-header">
+          <h2>Selamat Datang Kembali</h2>
+          <p>Silakan masuk ke akun eClinic Anda untuk melanjutkan.</p>
         </div>
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? "Memuat..." : "Login"}
-        </button>
-      </form>
 
-      <p className="text-link">
-        Belum punya akun? <Link to="/register">Daftar</Link>
-      </p>
+          <form onSubmit={handleSubmit}>
+            {error && (
+              <div className="auth-error" role="alert">
+                <FaInfoCircle /> {error}
+              </div>
+            )}
+
+            <div className="auth-form-group">
+              <label htmlFor="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                placeholder="Masukkan email Anda"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                autoComplete="email"
+              />
+            </div>
+            
+            <div className="auth-form-group">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Masukkan password Anda"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
+              />
+            </div>
+
+            <button type="submit" className="auth-submit-btn" disabled={isLoading}>
+              {isLoading ? "Memproses..." : "Masuk ke Akun"}
+            </button>
+          </form>
+
+          <p className="auth-link-text">
+            Belum memiliki akun? <Link to="/register">Daftar Sekarang</Link>
+          </p>
+      </div>
     </div>
   );
 };

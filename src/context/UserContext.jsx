@@ -1,26 +1,15 @@
-import React, { createContext, useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { createContext, useState } from 'react';
+
+// Fix #8: Hapus duplikasi fetch dokter — data dokter sudah di-fetch
+// langsung di komponen yang membutuhkannya (dokter.jsx, UserDetail.jsx, Order-Dokter.jsx).
+// UserContext hanya perlu menyimpan state UI (pilihan konsultasi & jadwal).
 
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [users, setUsers] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [selectedSchedule, setSelectedSchedule] = useState('');
   const [rating, setRating] = useState(0);
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get('https://64527770a2860c9ed40d2a69.mockapi.io/doctor/');
-        setUsers(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchUsers();
-  }, []);
 
   const updateInputValue = (value) => {
     setInputValue(value);
@@ -28,16 +17,22 @@ export const UserProvider = ({ children }) => {
 
   const handleScheduleChange = (value) => {
     setSelectedSchedule(value);
-  
-  }
+  };
 
-  const handleRatingChange = () => {
-    setRating();
-  }
-
+  const handleRatingChange = (value) => {
+    setRating(value);
+  };
 
   return (
-    <UserContext.Provider value={{ inputValue, selectedSchedule, setRating, handleRatingChange, handleScheduleChange, updateInputValue, users }}>
+    <UserContext.Provider value={{
+      inputValue,
+      selectedSchedule,
+      rating,
+      setRating,
+      handleRatingChange,
+      handleScheduleChange,
+      updateInputValue,
+    }}>
       {children}
     </UserContext.Provider>
   );

@@ -16,7 +16,7 @@ export default function ArtikelList() {
         });
         setArticles(updatedArticles);
       })
-      .catch((error) => console.log(error));
+      .catch(() => { /* API request failed silently; articles will remain empty */ });
   }, []);
 
   return (

@@ -10,7 +10,7 @@ const UserList = () => {
     fetch("https://64527770a2860c9ed40d2a69.mockapi.io/doctor")
       .then((response) => response.json())
       .then((data) => setUsers(data))
-      .catch((error) => console.log(error));
+      .catch(() => { /* API request failed silently; doctors list will remain empty */ });
   }, []);
 
   const displayedUsers = users.slice(0, 4);

@@ -72,8 +72,8 @@ const ChatContainer = ({ endpoint }) => {
 
     const chatRef = doc(chatsRef)
     setDoc(chatRef, newChat)
-    .then(() => console.log('Chat berhasil ditambahkan!'))
-    .catch((err) => console.log(err));
+    .then(() => { /* chat saved to firebase */ })
+    .catch(() => { /* firebase write failed silently */ });
 
   }
 

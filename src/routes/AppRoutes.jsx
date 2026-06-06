@@ -11,22 +11,39 @@ import ChatContainer from '../components/ChatContainer';
 import DetailArtikel from '../components/DetailArtikel';
 import OrderDokter from '../components/Order-Dokter';
 import SuksesDokter from '../components/SuksesDokter';
+import ProtectedRoute from '../components/ProtectedRoute';
 
 const NotFound = () => <h1>404 - Halaman tidak ditemukan</h1>;
 
 const AppRoutes = () => {
   return (
     <Routes>
+      {/* Public routes */}
       <Route path="/" element={<Home />} />
       <Route path="/cari-dokter" element={<CariDokter />} />
       <Route path="/artikel" element={<Artikel />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/profil-dokter/:id" element={<DokterDetail />} />
-      <Route path="/order-dokter/:id" element={<OrderDokter />} />
-      <Route path="/sukses-order-dokter" element={<SuksesDokter />} />
-      <Route path="/chat" element={<ChatContainer />} />
       <Route path="/detail-artikel/:articleId" element={<DetailArtikel />} />
+
+      {/* Protected routes — requires login */}
+      <Route path="/order-dokter/:id" element={
+        <ProtectedRoute>
+          <OrderDokter />
+        </ProtectedRoute>
+      } />
+      <Route path="/sukses-order-dokter" element={
+        <ProtectedRoute>
+          <SuksesDokter />
+        </ProtectedRoute>
+      } />
+      <Route path="/chat" element={
+        <ProtectedRoute>
+          <ChatContainer />
+        </ProtectedRoute>
+      } />
+
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

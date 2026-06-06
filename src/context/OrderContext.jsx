@@ -1,25 +1,14 @@
-import React, { createContext, useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { createContext, useState } from 'react';
+
+// Fix #8: Hapus duplikasi fetch dokter dari OrderContext.
+// OrderContext hanya perlu menyimpan data hasil order (harga & metode bayar)
+// agar bisa diakses oleh halaman SuksesDokter.
 
 export const OrderContext = createContext();
 
 export const OrderProvider = ({ children }) => {
-  const [users, setUsers] = useState([]);
   const [price, setPrice] = useState('');
   const [selectedPay, setSelectedPay] = useState('');
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get('https://64527770a2860c9ed40d2a69.mockapi.io/doctor/');
-        setUsers(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchUsers();
-  }, []);
 
   const updatePrice = (value) => {
     setPrice(value);
@@ -27,12 +16,10 @@ export const OrderProvider = ({ children }) => {
 
   const updateSelectedPay = (value) => {
     setSelectedPay(value);
-  
-  }
-
+  };
 
   return (
-    <OrderContext.Provider value={{ users, updatePrice, updateSelectedPay, setPrice, setSelectedPay }}>
+    <OrderContext.Provider value={{ price, selectedPay, updatePrice, updateSelectedPay, setPrice, setSelectedPay }}>
       {children}
     </OrderContext.Provider>
   );

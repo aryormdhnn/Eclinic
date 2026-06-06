@@ -17,7 +17,7 @@ export default function DetailArtikel() {
         setArticle(data);
         setLoading(false);
       })
-      .catch((error) => console.log(error));
+      .catch(() => { setLoading(false); });
   }, [articleId]);
 
   const override = css`

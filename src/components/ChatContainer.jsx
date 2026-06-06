@@ -1,16 +1,7 @@
 import React, { useEffect, useState, useRef, useContext } from 'react';
-import {
-  doc,
-  setDoc,
-  collection,
-  serverTimestamp,
-  query,
-  onSnapshot,
-  orderBy,
-} from 'firebase/firestore';
-import { FiSend, FiMessageCircle } from 'react-icons/fi';
+import { FiSend } from 'react-icons/fi';
 import { AuthContext } from '../context/AuthContext';
-import db from '../firebaseConfig/firebaseConfig';
+import { supabase } from '../lib/supabaseClient';
 import "../css/chatcontainer.css";
 
 const ChatContainer = () => {
@@ -19,13 +10,12 @@ const ChatContainer = () => {
   const [message, setMessage] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [hasJoined, setHasJoined] = useState(false);
+  const [isSending, setIsSending] = useState(false);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
-  // Derive username from Supabase user if available, else use manual input
+  // Derive username from Supabase user if available
   const currentUser = user?.user_metadata?.username || user?.email?.split('@')[0] || displayName;
-
-  const chatsRef = collection(db, 'Messages');
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -35,40 +25,64 @@ const ChatContainer = () => {
     scrollToBottom();
   }, [chats]);
 
-  // Listen to Firestore in real-time
-  useEffect(() => {
-    const q = query(chatsRef, orderBy('createdAt', 'asc'));
-    const unsub = onSnapshot(q, (querySnapshot) => {
-      const fireChats = [];
-      querySnapshot.forEach((doc) => {
-        fireChats.push({ id: doc.id, ...doc.data() });
-      });
-      setChats(fireChats);
-    });
-    return () => unsub();
-  }, []);
-
-  // Auto-join if user is logged in via Supabase
+  // Auto-join if user already logged in via Supabase
   useEffect(() => {
     if (user) setHasJoined(true);
   }, [user]);
 
-  const sendMessage = async () => {
-    if (!message.trim() || !currentUser) return;
+  // 1. Fetch existing messages + subscribe realtime
+  useEffect(() => {
+    if (!hasJoined) return;
 
-    const newChat = {
-      message: message.trim(),
-      user: currentUser,
-      createdAt: serverTimestamp(),
+    // Initial fetch — ambil pesan yang sudah ada
+    const fetchMessages = async () => {
+      const { data, error } = await supabase
+        .from('messages')
+        .select('*')
+        .order('created_at', { ascending: true });
+
+      if (!error && data) setChats(data);
     };
 
-    const chatRef = doc(chatsRef);
-    setMessage('');
-    inputRef.current?.focus();
+    fetchMessages();
 
-    setDoc(chatRef, newChat)
-      .then(() => { /* saved */ })
-      .catch(() => { /* failed silently */ });
+    // Realtime subscription — dengarkan INSERT baru
+    const channel = supabase
+      .channel('messages-channel')
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'messages' },
+        (payload) => {
+          setChats((prev) => [...prev, payload.new]);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [hasJoined]);
+
+  // 2. Kirim pesan baru ke Supabase
+  const sendMessage = async () => {
+    if (!message.trim() || !currentUser || isSending) return;
+
+    setIsSending(true);
+    const text = message.trim();
+    setMessage('');
+
+    const { error } = await supabase.from('messages').insert({
+      user_name: currentUser,
+      message: text,
+    });
+
+    if (error) {
+      // Jika gagal, kembalikan pesan ke input
+      setMessage(text);
+    }
+
+    setIsSending(false);
+    inputRef.current?.focus();
   };
 
   const handleKeyDown = (e) => {
@@ -91,11 +105,14 @@ const ChatContainer = () => {
   };
 
   const formatTime = (timestamp) => {
-    if (!timestamp?.toDate) return '';
-    return timestamp.toDate().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+    if (!timestamp) return '';
+    return new Date(timestamp).toLocaleTimeString('id-ID', {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
   };
 
-  // ── Login Screen ─────────────────────────────────────────────────────
+  // ── Login Screen ──────────────────────────────────────────────────────
   if (!hasJoined) {
     return (
       <div className="chat-page-wrapper">
@@ -113,7 +130,10 @@ const ChatContainer = () => {
             <div className="chat-login-icon">💬</div>
             <h3>Masuk ke Ruang Chat</h3>
             <p>Masukkan nama tampilan Anda untuk mulai berkonsultasi</p>
-            <form onSubmit={handleJoin} style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <form
+              onSubmit={handleJoin}
+              style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+            >
               <input
                 type="text"
                 className="chat-login-input"
@@ -147,12 +167,16 @@ const ChatContainer = () => {
               <p><span className="chat-status-dot" />Online — {currentUser}</p>
             </div>
           </div>
-          <button className="chat-header-logout" onClick={handleLogout} aria-label="Keluar dari chat">
+          <button
+            className="chat-header-logout"
+            onClick={handleLogout}
+            aria-label="Keluar dari chat"
+          >
             Keluar
           </button>
         </div>
 
-        {/* Messages */}
+        {/* Messages Area */}
         <div className="chat-messages-area">
           {chats.length === 0 ? (
             <div className="chat-empty-state">
@@ -161,8 +185,8 @@ const ChatContainer = () => {
             </div>
           ) : (
             chats.map((chat, index) => {
-              const isSender = chat.user === currentUser;
-              const initial = (chat.user || '?').charAt(0).toUpperCase();
+              const isSender = chat.user_name === currentUser;
+              const initial = (chat.user_name || '?').charAt(0).toUpperCase();
 
               return (
                 <div
@@ -174,13 +198,17 @@ const ChatContainer = () => {
                   </div>
                   <div className="message-content">
                     {!isSender && (
-                      <span className="message-username">{chat.user}</span>
+                      <span className="message-username">{chat.user_name}</span>
                     )}
-                    <div className="message-bubble" role="article" aria-label={`Pesan dari ${chat.user}`}>
+                    <div
+                      className="message-bubble"
+                      role="article"
+                      aria-label={`Pesan dari ${chat.user_name}`}
+                    >
                       {chat.message}
                     </div>
-                    {chat.createdAt && (
-                      <span className="message-time">{formatTime(chat.createdAt)}</span>
+                    {chat.created_at && (
+                      <span className="message-time">{formatTime(chat.created_at)}</span>
                     )}
                   </div>
                 </div>
@@ -190,7 +218,7 @@ const ChatContainer = () => {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input */}
+        {/* Input Area */}
         <div className="chat-input-area">
           <input
             ref={inputRef}
@@ -205,7 +233,7 @@ const ChatContainer = () => {
           <button
             className="chat-send-btn"
             onClick={sendMessage}
-            disabled={!message.trim()}
+            disabled={!message.trim() || isSending}
             aria-label="Kirim pesan"
           >
             <FiSend />
